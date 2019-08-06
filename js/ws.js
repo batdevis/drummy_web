@@ -4,11 +4,11 @@ ws.onmessage = function (event) {
   console.log('data', data);
 
   const channelMap = {
-    96: 0,
+    96: 0,//play/pause
     97: 1,
     98: 2,
     99: 3
-    //100: 4,
+    100: 4,
     //101: 5
   };
 
@@ -16,9 +16,14 @@ ws.onmessage = function (event) {
     (data.channel == 0) &&
     (data.value == 127)
   ){
-    var channelId = channelMap[data.controller];
-    console.log(`toggle(${channelId})`);
-    //toggle(channelMap[data.controller])
-    channels[channelId].solo = !channels[channelId].solo;
+    if (data.controller == 0) {
+      Tone.Transport.toggle();
+    } else {
+      var channelId = channelMap[data.controller];
+      console.log(`toggle(${channelId})`);
+      if(channels.indexOf(channelId) > -1) {
+        channels[channelId].mute = !channels[channelId].mute;
+      }
+    }
   }
 }
