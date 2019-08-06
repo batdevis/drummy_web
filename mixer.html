@@ -22,20 +22,17 @@
 	</style>
 </head>
 <body>
-		<tone-loader></tone-loader>
-		<tone-explanation label="Channel">
-			<a href="https://tonejs.github.io/docs/PanVol">Tone.Channel</a> provides a simple channel interface. It allows for panning and volume changes as well as the ability to <a href="https://tonejs.github.io/docs/Solo">solo</a> (exclude audio in other Tone.Channels). 
-		</tone-explanation>
+  <tone-loader></tone-loader>
 
-		<tone-content>
-			<tone-play-toggle></tone-play-toggle>
-			<div id="tracks">
-				<tone-channel label="A1" id="A1"></tone-channel>
-				<tone-channel label="A2" id="A2"></tone-channel>
-				<tone-channel label="A3" id="A3"></tone-channel>
-				<tone-channel label="A4" id="A4"></tone-channel>
-			</div>
-		</tone-content>
+	<tone-content>
+  	<tone-play-toggle></tone-play-toggle>
+		<div id="tracks">
+			<tone-channel label="A1" id="A1"></tone-channel>
+			<tone-channel label="A2" id="A2"></tone-channel>
+			<tone-channel label="A3" id="A3"></tone-channel>
+			<tone-channel label="A4" id="A4"></tone-channel>
+		</div>
+	</tone-content>
 
 	<script type="text/javascript">
 		function makeChannel(name){
