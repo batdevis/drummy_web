@@ -10,6 +10,7 @@
 	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
 	<script src="./js/Tone.js"></script>
 	<script src="./js/tonejs-ui.js"></script>
+	<script src="./js/ws.js"></script>
 	<style type="text/css">
 		#tracks {
 			display: flex;
@@ -45,12 +46,15 @@
 
 			//bind the UI
 			document.querySelector(`#${name}`).bind(channel);
+
+      return channel;
 		}
 
-		makeChannel("A1");
-		makeChannel("A2");
-		makeChannel("A3");
-		//makeChannel("A4");
+    var channels = []
+		channels.push(makeChannel("A1"));
+		channels.push(makeChannel("A2"));
+		channels.push(makeChannel("A3"));
+		channels.push(makeChannel("A4"));
 
 		document.querySelector("tone-play-toggle").bind(Tone.Transport);
 	</script>
