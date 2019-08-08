@@ -1,4 +1,4 @@
-var ws = new WebSocket("ws://localhost:8002", "echo-protocol")
+const ws = new WebSocket("ws://localhost:8002", "echo-protocol");
 ws.onmessage = function (event) {
   const data = JSON.parse(event.data);
   console.log('data', data);
@@ -7,9 +7,8 @@ ws.onmessage = function (event) {
     96: 0,//play/pause
     97: 1,
     98: 2,
-    99: 3
-    100: 4,
-    //101: 5
+    99: 3,
+    100: 4
   };
 
   if (
