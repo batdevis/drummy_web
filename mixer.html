@@ -2,17 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-	<title>Mixer</title>
+	<title>Noboro - Mixer</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
 
-	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
-	<script src="./js/Tone.js"></script>
-	<script src="./js/tonejs-ui.js"></script>
-	<script src="./js/cfg.js"></script>
-	<script src="./js/ws.js"></script>
-	<script src="./js/mixer.js"></script>
 	<style type="text/css">
 		#tracks {
 			display: flex;
@@ -37,6 +31,14 @@
 		</div>
 	</tone-content>
 
+	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
+	<script src="./js/lib/socket.io.slim.js"></script>
+	<script src="./js/lib/Tone.js"></script>
+	<script src="./js/lib/tonejs-ui.js"></script>
+
+	<script src="./js/cfg.js"></script>
+	<script src="./js/ws.js"></script>
+	<script src="./js/mixer.js"></script>
 	<script type="text/javascript">
 /*
     function makeChannel(name){

@@ -1,7 +1,11 @@
-const ws = new WebSocket("ws://localhost:8002", "echo-protocol");
-ws.onmessage = function (event) {
-  const data = JSON.parse(event.data);
-  console.log('data', data);
+const ws = io('http://localhost:8002');
+ws.on('midiInpuList', function (data) {
+  console.log('[ws] midiInputList', data);
+
+});
+
+ws.on('midiCc', function (data) {
+  console.log('[ws] midiCc', data);
 
   const channelMap = {
     96: 0,//play/pause
@@ -20,9 +24,9 @@ ws.onmessage = function (event) {
     } else {
       var channelId = channelMap[data.controller];
       console.log(`toggle(${channelId})`);
-      if(channels.indexOf(channelId) > -1) {
-        channels[channelId].mute = !channels[channelId].mute;
+      if(mixer.channels.indexOf(channelId) > -1) {
+        mixer.channels[channelId].mute = !mixer.channels[channelId].mute;
       }
     }
   }
-}
+});
