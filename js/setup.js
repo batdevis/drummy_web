@@ -5,3 +5,5 @@ function getMidiInputList(){
   console.log('getMidiInputList()');
   ws.emit('getMidiInputList', {});
 }
+
+ready(getMidiInputList);

@@ -10,13 +10,23 @@ ws.on('midiInputList', function (data) {
 
   data.inputs.forEach(function(input) {
     let li = document.createElement('li');
-    li.innerText = input;
+    let a = document.createElement('a');
+    a.href = '#';
+    a.innerText = input;
+    a.setAttribute('data-device', input);
+    a.addEventListener('click', activateMidiInput, false);
+    li.appendChild(a);
     midiInputs.appendChild(li);
   });
   
   const midiInputActive = document.getElementById("midi_input_active");
   midiInputActive.innerText = data.active;
 });
+
+function activateMidiInput(e){
+  const device = e.target.getAttribute('data-device');
+  ws.emit('setMidiInput', {device: device});
+}
 
 ws.on('midiCc', function (data) {
   console.log('[ws] midiCc', data);
