@@ -1,5 +1,7 @@
-document.getElementById("midi_input_refresh").onClick = midiInputList;
+const btn = document.getElementById("midi_input_refresh");
+btn.addEventListener('click', getMidiInputList);
 
-function midiInputList(){
-  ws.emit('midiInputList', {});
+function getMidiInputList(){
+  console.log('getMidiInputList()');
+  ws.emit('getMidiInputList', {});
 }

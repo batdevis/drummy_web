@@ -1,7 +1,21 @@
 const ws = io('http://localhost:8002');
-ws.on('midiInpuList', function (data) {
-  console.log('[ws] midiInputList', data);
 
+ws.on('midiInputList', function (data) {
+  console.log('[ws] midiInputList', data);
+  const midiInputs = document.getElementById("midi_inputs");
+
+  while (midiInputs.hasChildNodes()) {
+    midiInputs.removeChild(midiInputs.firstChild);
+  }
+
+  data.inputs.forEach(function(input) {
+    let li = document.createElement('li');
+    li.innerText = input;
+    midiInputs.appendChild(li);
+  });
+  
+  const midiInputActive = document.getElementById("midi_input_active");
+  midiInputActive.innerText = data.active;
 });
 
 ws.on('midiCc', function (data) {
