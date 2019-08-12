@@ -38,7 +38,8 @@
 	</tone-content>
 
 	<script type="text/javascript">
-		function makeChannel(name){
+/*
+    function makeChannel(name){
 			var channel = new Tone.Channel().toMaster();
 			var player = new Tone.Player({
 				url : `./audio/my/A/${name}.[wav|ogg|mp3]`,
@@ -59,6 +60,7 @@
 		channels.push(makeChannel("A4"));
 
 		document.querySelector("tone-play-toggle").bind(Tone.Transport);
+*/
 	</script>
 </body>
 </html>
