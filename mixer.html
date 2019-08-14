@@ -19,51 +19,29 @@
 	</style>
 </head>
 <body>
+  <div><a href="setup.html">setup</a></div>
+
   <tone-loader></tone-loader>
 
-	<tone-content>
-  	<tone-play-toggle></tone-play-toggle>
-		<div id="tracks">
-			<tone-channel label="A1" id="A1"></tone-channel>
-			<tone-channel label="A2" id="A2"></tone-channel>
-			<tone-channel label="A3" id="A3"></tone-channel>
-			<tone-channel label="A4" id="A4"></tone-channel>
-		</div>
-	</tone-content>
+  <tone-content>
+    <tone-play-toggle></tone-play-toggle>
+    <div id="tracks">
+      <!--
+      <tone-channel label="A1" id="A1"></tone-channel>
+      <tone-channel label="A2" id="A2"></tone-channel>
+      <tone-channel label="A3" id="A3"></tone-channel>
+      <tone-channel label="A4" id="A4"></tone-channel>
+      -->
+    </div>
+  </tone-content>
 
-	<script src="https://unpkg.com/@webcomponents/webcomponentsjs@^2/webcomponents-bundle.js"></script>
-	<script src="./js/lib/socket.io.slim.js"></script>
+  <script src="./js/lib/webcomponents-bundle.js"></script>
 	<script src="./js/lib/Tone.js"></script>
 	<script src="./js/lib/tonejs-ui.js"></script>
-
+	<script src="./js/lib/socket.io.js"></script>
 	<script src="./js/cfg.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="./js/ws.js"></script>
+  <script src="./js/ws.js"></script>
 	<script src="./js/mixer.js"></script>
-	<script type="text/javascript">
-/*
-    function makeChannel(name){
-			var channel = new Tone.Channel().toMaster();
-			var player = new Tone.Player({
-				url : `./audio/my/A/${name}.[wav|ogg|mp3]`,
-				loop : true
-			}).sync().start(0);
-			player.chain(channel);
-
-			//bind the UI
-			document.querySelector(`#${name}`).bind(channel);
-
-      return channel;
-		}
-
-    var channels = []
-		channels.push(makeChannel("A1"));
-		channels.push(makeChannel("A2"));
-		channels.push(makeChannel("A3"));
-		channels.push(makeChannel("A4"));
-
-		document.querySelector("tone-play-toggle").bind(Tone.Transport);
-*/
-	</script>
 </body>
 </html>
