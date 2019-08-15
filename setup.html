@@ -11,9 +11,9 @@
   <div><a href="mixer.html">mixer</a></div>
   <h1>Settings</h1>
 
-  <h2>midi</h2>
+  <h2>Midi</h2>
 
-  <h3>input</h3>
+  <h3>Input</h3>
 
   <button id="midi_input_refresh">refresh</button>
   
@@ -24,8 +24,19 @@
   <ul id="midi_inputs">
   </ul>
 
-	
+  <h3>Mapping</h3>
+
+  <ul id="midi_mapping">
+    <!--
+    <li class="midi_mapping" id="midi_mapping_05">
+      <h5>play stop all</h5>
+      <div class="midi_mapping_value" id="midi_mapping_value_05"></div>
+    </li>
+    -->
+  </ul>
+
   <script src="./js/lib/socket.io.js"></script>
+	<script src="./js/store.js"></script>
 	<script src="./js/cfg.js"></script>
 	<script src="./js/main.js"></script>
 	<script src="./js/ws.js"></script>
