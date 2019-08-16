@@ -76,36 +76,37 @@ function printPedalboard(){
   Store.cfg.pedalboard_buttons.forEach(button => {
     let mapping = Store.midiInputs.active.pedalboard.mappings[button.name];
     
-    let li = document.createElement('li');
-    li.class = 'midi_mapping';
-    li.id = `midi_mapping_${button.name}`;
-    
     let ee = []
-    ee[0] = document.createElement('h5');
-    ee[0].innerText = button.title
+    let tr = document.createElement('tr');
 
-    ee[1] = document.createElement('p');
-    ee[1].innerText = button.description;
+    ee[0] = document.createElement('td');
+    ee[0].class = 'midi_mapping';
+    ee[0].id = `midi_mapping_${button.name}`;
     
+    ee[1] = document.createElement('td');
+    ee[1].innerText = button.title
+
+    ee[2] = document.createElement('td');
+    ee[2].innerText = button.description;
      
-    ee[2] = document.createElement('div');
-    ee[2].class = 'midi_mapping_message_type';
-    ee[2].id = `midi_mapping_message_type_${button.name}`;
-    ee[2].innerText = mapping.message_type;
+    ee[3] = document.createElement('td');
+    ee[3].class = 'midi_mapping_message_type';
+    ee[3].id = `midi_mapping_message_type_${button.name}`;
+    ee[3].innerText = mapping.message_type;
     
-    ee[3] = document.createElement('div');
-    ee[3].class = 'midi_mapping_channel';
-    ee[3].id = `midi_mapping_channel_${button.name}`;
-    ee[3].innerText = mapping.channel;
+    ee[4] = document.createElement('td');
+    ee[4].class = 'midi_mapping_channel';
+    ee[4].id = `midi_mapping_channel_${button.name}`;
+    ee[4].innerText = mapping.channel;
     
-    ee[4] = document.createElement('div');
-    ee[4].class = 'midi_mapping_value';
-    ee[4].id = `midi_mapping_value_${button.name}`;
-    ee[4].innerText = mapping.value;
+    ee[5] = document.createElement('td');
+    ee[5].class = 'midi_mapping_value';
+    ee[5].id = `midi_mapping_value_${button.name}`;
+    ee[5].innerText = mapping.value;
 
-    ee.forEach(e => li.appendChild(e));
+    ee.forEach(e => tr.appendChild(e));
     const midiMapping = document.getElementById("midi_mapping");
-    midiMapping.appendChild(li);
+    midiMapping.appendChild(tr);
   });
 }
 
