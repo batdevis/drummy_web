@@ -61,7 +61,9 @@ ready( () => {
   console.log('ready.');
   mixer = createMixer();
   document.querySelector("tone-play-toggle").bind(Tone.Transport);
+  //document.querySelector("tone-transport").bind(Tone.Transport);
 
+  //wait 1 sec
   async function bc() {
     await new Promise(resolve => setTimeout(bindChannels, 1000)); // millisec
   }
