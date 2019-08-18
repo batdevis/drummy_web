@@ -1,5 +1,6 @@
 const CFG = {
   channel_number: 4,
+  audio_folder: 'audio/hydrogen';
   pedalboard_buttons: [
     {
       name: "track01",
