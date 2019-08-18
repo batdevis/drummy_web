@@ -16,6 +16,20 @@
 			margin: 5px;
 			width: 20%;
 		}
+		
+    #grid {
+			display: flex;
+		}
+		#grid .grid {
+			flex-grow: 1;
+			margin: 5px;
+			width: 20px;
+			height: 20px;
+      border: 1px solid #BCBCBC;
+		}
+		#grid .grid.active{
+      background-color: #CCC;
+    }
 	</style>
 </head>
 <body>
@@ -33,6 +47,24 @@
       <tone-channel label="A3" id="A3"></tone-channel>
       <tone-channel label="A4" id="A4"></tone-channel>
       -->
+    </div>
+    <div id="grid">
+      <div class="grid" id="grid_0"></div>
+      <div class="grid" id="grid_1"></div>
+      <div class="grid" id="grid_2"></div>
+      <div class="grid" id="grid_3"></div>
+      <div class="grid" id="grid_4"></div>
+      <div class="grid" id="grid_5"></div>
+      <div class="grid" id="grid_6"></div>
+      <div class="grid" id="grid_7"></div>
+      <div class="grid" id="grid_8"></div>
+      <div class="grid" id="grid_9"></div>
+      <div class="grid" id="grid_10"></div>
+      <div class="grid" id="grid_11"></div>
+      <div class="grid" id="grid_12"></div>
+      <div class="grid" id="grid_13"></div>
+      <div class="grid" id="grid_14"></div>
+      <div class="grid" id="grid_15"></div>
     </div>
   </tone-content>
 
