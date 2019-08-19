@@ -1,0 +1,26 @@
+#tracks {
+  display: flex;
+}
+#tracks tone-channel {
+  flex-grow: 1;
+  margin: 5px;
+  width: 20%;
+}
+
+#grid {
+  display: flex;
+}
+#grid .grid {
+  flex-grow: 1;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #BCBCBC;
+}
+#grid .grid.active{
+  background-color: #EEE;
+}
+#grid .grid.quarter{
+  background-color: #AAA;
+  border-color: #000;
+}
