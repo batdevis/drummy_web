@@ -10,8 +10,10 @@ class Mixer {
   
   makeChannel(channelRef) {
     var channel = new Tone.Channel().toMaster();
+    let url = `${CFG.audio_folder}/${channelRef}.wav`;
+    console.log('[makeChannel] url', url);
     var player = new Tone.Player({
-      url : `./audio/my/A/${channelRef}.[wav|ogg|mp3]`,
+      url : url,
       loop : true
     }).sync().start(0);
     player.chain(channel);
@@ -61,11 +63,15 @@ function setupGrid(){
   }, "16n");
 */
   const metronome = new Tone.Sequence( (time, step) => {
-    console.log('Tone.Sequence', step);
-    let prevStep = (step === 0) ? 15 : (step - 1);
-
-    document.getElementById(`grid_${prevStep}`).classList.remove('active');
-    document.getElementById(`grid_${step}`).classList.add('active');
+    Tone.Draw.schedule( () => {
+      let prevStep = (step === 0) ? 15 : (step - 1);
+      document.getElementById(`grid_${prevStep}`).classList.remove('active');
+      document.getElementById(`grid_${prevStep}`).classList.remove('quarter');
+      document.getElementById(`grid_${step}`).classList.add('active');
+      if (step % 4 === 0){
+        document.getElementById(`grid_${step}`).classList.add('quarter');
+      }
+    }, time);
   }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n").start(0);
 
 }
