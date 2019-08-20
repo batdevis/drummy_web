@@ -2,7 +2,6 @@ class Mixer {
   channels = [];
 
   addChannel(channelRef) {
-    console.log('[Mixer] addChannel', channelRef);
     let channel = this.makeChannel(channelRef);
     this.channels.push(channel);
     return this;
@@ -11,7 +10,6 @@ class Mixer {
   makeChannel(channelRef) {
     var channel = new Tone.Channel().toMaster();
     let url = `${CFG.audio_folder}/${channelRef}.wav`;
-    console.log('[makeChannel] url', url);
     var player = new Tone.Player({
       url : url,
       loop : true
@@ -79,7 +77,6 @@ function setupGrid(){
 let mixer;
 
 ready( () => {
-  console.log('ready.');
   mixer = createMixer();
   document.querySelector("tone-play-toggle").bind(Tone.Transport);
   //document.querySelector("tone-transport").bind(Tone.Transport);
