@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+	<title>Noboro - filebank</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+  <div><a href="mixer.html">mixer</a> | <a href="setup.html">midi setup</a></div>
+  <h1>Filebank</h1>
+
+  <button id="file_tree_refresh">refresh</button>
+
+  <h2>channel assignments</h2>
+  <ul id="channels">
+  </ul>
+
+  <h2>banks</h2>
+  <ul id="file_tree">
+  </ul>
+
+  <script src="./js/lib/socket.io.js"></script>
+	<script src="./js/store.js"></script>
+	<script src="./js/cfg.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./js/ws.js"></script>
+	<script src="./js/filebank.js"></script>
+</body>
+</html>

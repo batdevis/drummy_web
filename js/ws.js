@@ -9,6 +9,20 @@ ws.on('midiInputList', function (data) {
   printPedalboard();
 });
 
+ws.on('fileTree', function (data) {
+  console.log('[ws] fileTree', data);
+  Store.fileTree = data;
+
+  printFileTree();
+});
+
+ws.on('channels', function (data) {
+  console.log('[ws] channels', data);
+  Store.channels = data.channels;
+
+  printChannels();
+});
+
 ws.on('midiCc', function (data) {
   console.log('[ws] midiCc', data);
 
@@ -37,7 +51,7 @@ ws.on('midiCc', function (data) {
 });
 
 function printMidiInputs(){
-  if(typeof(Store.midiInputs) == 'undefined'){
+  if(typeof(Store.midiInputs) === 'undefined'){
     return;
   }
   const midiInputs = document.getElementById("midi_inputs");
@@ -110,3 +124,70 @@ function printPedalboard(){
   });
 }
 
+function printFileTree(){
+  if(typeof(Store.fileTree) === 'undefined'){
+    return;
+  }
+  const fileTree = document.getElementById("file_tree");
+
+  while (fileTree.hasChildNodes()) {
+    fileTree.removeChild(fileTree.firstChild);
+  }
+
+  /*
+   *  <ul id="file_tree">
+   *    <li>
+   *      <h4>a</h4>
+   *      <ul>
+   *        <li>a1.wav</li>
+   *        <li>a2.wav</li>
+   *      </ul>
+   *    </li>
+   *
+   *    <li>
+   *      <h4>b</h4>
+   *      <ul>
+   *        <li>b1.wav</li>
+   *        <li>b2.wav</li>
+   *      </ul>
+   *    </li>
+   *  </ul>
+  */
+
+  Store.fileTree.tree.forEach(dir => {
+    let li_0 = document.createElement('li');
+    let h4_0 = document.createElement('h4');
+    h4_0.innerText = dir.name;
+    let ul_0 = document.createElement('ul');
+
+    dir.files.forEach(file => {
+      let pathName = `${dir.name}_${file}`;
+      console.log('pathName', pathName);
+      let li_1 = document.createElement('li');
+      li_1.id = `tree_${pathName}`;
+      li_1.innerText = file;
+      ul_0.appendChild(li_1);
+    })
+
+    li_0.appendChild(h4_0);
+    li_0.appendChild(ul_0);
+
+    fileTree.appendChild(li_0);
+  });
+}
+
+function printChannels(){
+  if(typeof(Store.channels) === 'undefined'){
+    return;
+  }
+  const channels = document.getElementById("channels");
+
+  while (channels.hasChildNodes()) {
+    channels.removeChild(channels.firstChild);
+  }
+  Store.channels.forEach(channel => {
+    let li = document.createElement('li');
+    li.innerText = `${channel.name}: ${channel.file}`;
+    channels.appendChild(li);
+  });
+}
