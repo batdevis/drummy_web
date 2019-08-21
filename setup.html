@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
 	<title>Noboro - setup</title>
 
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
+  <link rel="stylesheet" href="css/turretcss.min.css" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
-  <div><a href="mixer.html">mixer</a> | <a href="filebank.html">filebank</a></div>
-  <h1>Settings</h1>
-
-  <h2>Midi</h2>
-
-  <h3>Input</h3>
-
-  <button id="midi_input_refresh">refresh</button>
+  <div class="container">
+    <nav class="nav-inline">
+      <ul>
+        <li><a href="mixer.html">mixer</a></li>
+        <li><a href="filebank.html">filebank</a></li>
+      </ul>
+    </nav>
   
-  <h4>Active input</h4>
-  <div id="midi_input_active"></div>
+    <h1>Settings</h1>
 
-  <h4>Available inputs</h4>
-  <ul id="midi_inputs">
-  </ul>
+    <h2>Midi</h2>
 
-  <h3>Mapping</h3>
+    <h3>Input</h3>
 
-  <!--
-  <ul id="midi_mapping">
-    <li class="midi_mapping" id="midi_mapping_05">
-      <h5>play stop all</h5>
-      <div class="midi_mapping_value" id="midi_mapping_value_05"></div>
-    </li>
-  </ul>
-  -->
+    <button id="midi_input_refresh">refresh</button>
+    
+    <h4>Active input</h4>
+    <div id="midi_input_active"></div>
 
-  <table id="midi_mapping">
-    <thead>
-      <tr>
-        <th>button</th>
-        <th>description</th>
-        <th>midi message type</th>
-        <th>midi channel</th>
-        <th>midi value</th>
-      </tr>
-    </thead>
-    <tbody>
-    </tbody>
-  </table>
+    <h4>Available inputs</h4>
+    <ul id="midi_inputs">
+    </ul>
+
+    <h3>Mapping</h3>
+
+    <!--
+    <ul id="midi_mapping">
+      <li class="midi_mapping" id="midi_mapping_05">
+        <h5>play stop all</h5>
+        <div class="midi_mapping_value" id="midi_mapping_value_05"></div>
+      </li>
+    </ul>
+    -->
+
+    <table id="midi_mapping">
+      <thead>
+        <tr>
+          <th>button</th>
+          <th>description</th>
+          <th>midi message type</th>
+          <th>midi channel</th>
+          <th>midi value</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+
+  </div>
 
   <script src="./js/lib/socket.io.js"></script>
 	<script src="./js/store.js"></script>
