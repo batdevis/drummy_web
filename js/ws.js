@@ -87,6 +87,11 @@ function activateMidiInput(e){
 }
 
 function printPedalboard(){
+  const tbody = document.querySelector("#midi_mapping tbody");
+  while (tbody.hasChildNodes()) {
+    tbody.removeChild(tbody.firstChild);
+  }
+
   Store.cfg.pedalboard_buttons.forEach(button => {
     let mapping = Store.midiInputs.active.pedalboard.mappings[button.name];
     console.log('button', button);
@@ -119,8 +124,7 @@ function printPedalboard(){
     ee[4].innerText = mapping.value;
 
     ee.forEach(e => tr.appendChild(e));
-    const midiMapping = document.getElementById("midi_mapping");
-    midiMapping.appendChild(tr);
+    tbody.appendChild(tr);
   });
 }
 
