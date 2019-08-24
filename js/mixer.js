@@ -1,28 +1,22 @@
 class Mixer {
   channels = [];
 
-  addChannel(channelRef) {
-    let channel = this.makeChannel(channelRef);
-    this.channels.push(channel);
-    return this;
+  addChannel(channel) {
+    let ch = this.makeChannel(channel);
+    this.channels.push(ch);
+    return ch;
   }
   
-  makeChannel(channelRef) {
-    var channel = new Tone.Channel().toMaster();
-    let url = `${CFG.audio_folder}/${channelRef}.wav`;
+  makeChannel(channel) {
+    var ch = new Tone.Channel().toMaster();
+    let url = `${Store.cfg.audio_folder}/${channel.file}`;
     var player = new Tone.Player({
       url : url,
       loop : true
     }).sync().start(0);
-    player.chain(channel);
+    player.chain(ch);
 
-    //bind the UI
-    //document.querySelector(`#${channelRef}`).bind(channel);
-    /*
-    let toneChannel = document.getElementById(channelRef);
-    toneChannel.bind(channel);
-    */
-    return channel;
+    return ch;
   }
 }
 
@@ -30,36 +24,21 @@ function createMixer() {
   let obj = new Mixer();
   let tracks = document.getElementById("tracks");
 
-  for(let i=0; i < CFG.channel_number; i++){
-    let channelRef = "A" + (i + 1);
+  if (Store.channels) {
+    Store.channels.forEach(channel => {
+      let toneChannel = document.createElement('tone-channel');
+      toneChannel.label = channel.name;
+      toneChannel.id = `channel_${channel.id}`;
+      tracks.appendChild(toneChannel);
 
-    let toneChannel = document.createElement('tone-channel');
-    toneChannel.label = `CH ${channelRef}`;
-    toneChannel.id = channelRef;
-    //console.log('[createMixer()] appendChild', toneChannel);
-    tracks.appendChild(toneChannel);
-
-    obj.addChannel(channelRef);
+      let ch = obj.addChannel(channel);
+      //toneChannel.bind(ch);
+    });
   }
   return obj;
 }
 
-function bindChannels(){
-  for(let i=0; i < CFG.channel_number; i++){
-    let channelRef = "A" + (i + 1);
-    let toneChannel = document.getElementById(channelRef);
-    toneChannel.bind(mixer.channels[i]);
-  }
-}
-
 function setupGrid(){
-/*
-  Tone.Transport.scheduleRepeat( time => {
-    Tone.Draw.schedule( () => {
-      console.log('Tone.Draw', time);
-    }, time);
-  }, "16n");
-*/
   const metronome = new Tone.Sequence( (time, step) => {
     Tone.Draw.schedule( () => {
       let prevStep = (step === 0) ? 15 : (step - 1);
@@ -71,19 +50,19 @@ function setupGrid(){
       }
     }, time);
   }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n").start(0);
-
 }
 
 let mixer;
 
 ready( () => {
-  mixer = createMixer();
   document.querySelector("tone-play-toggle").bind(Tone.Transport);
-  //document.querySelector("tone-transport").bind(Tone.Transport);
+  setupGrid();
+  
+  ws.emit('getChannels', {});
+  //mixer = createMixer();
 
   function init(){
-    bindChannels();
-    setupGrid();
+    //Ui.bindChannels();
   }
 
   //wait 1 sec

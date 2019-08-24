@@ -21,6 +21,7 @@ ws.on('channels', function (data) {
   Store.channels = data.channels;
 
   Ui.printChannels();
+  Ui.createMixer();
 });
 
 ws.on('midiCc', function (data) {

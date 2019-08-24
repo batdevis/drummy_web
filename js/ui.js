@@ -157,30 +157,31 @@ const Ui = {
       return;
     }
     const channelsList = document.getElementById("channels");
+    if (channelsList) {
+      while (channelsList.hasChildNodes()) {
+        channelsList.removeChild(channelsList.firstChild);
+      }
+      Store.channels.forEach(channel => {
+        let li = document.createElement('li');
+        li.id = `channelFile_${channel.id}`;
+        
+        let a = document.createElement('a');
+        a.href = '#';
+        a.innerText = channel.name;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.selectChannel(channel);
+        });
 
-    while (channelsList.hasChildNodes()) {
-      channelsList.removeChild(channelsList.firstChild);
-    }
-    Store.channels.forEach(channel => {
-      let li = document.createElement('li');
-      li.id = `channelFile_${channel.id}`;
-      
-      let a = document.createElement('a');
-      a.href = '#';
-      a.innerText = channel.name;
-      a.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.selectChannel(channel);
+        let span = document.createElement('span');
+        span.innerText = `: ${channel.file}`;
+
+        li.appendChild(a);
+        li.appendChild(span);
+
+        channels.appendChild(li);
       });
-
-      let span = document.createElement('span');
-      span.innerText = `: ${channel.file}`;
-
-      li.appendChild(a);
-      li.appendChild(span);
-
-      channels.appendChild(li);
-    });
+    }
   },
 
   selectChannel(channel) {
@@ -213,6 +214,33 @@ const Ui = {
     } else {
       fileTreeWrapper.style.display = 'none';
     }
+  },
+
+  bindChannels() {
+    if (mixer.channels.length) {
+      let i = 0;
+      Store.channels.forEach(channel => {
+        let channelRef = `channel_${channel.id}`;
+        let toneChannel = document.getElementById(channelRef);
+        toneChannel.bind(mixer.channels[i]);
+        i++;
+      });
+    }
+  },
+  
+  createMixer() {
+    if (document.getElementById('mixer')) {
+      mixer = createMixer();
+      
+      //wait 1 sec
+      async function onetwothreefour() {
+        await new Promise(resolve => {
+          setTimeout(Ui.bindChannels, 1000);//millisec
+        });
+      }
+      onetwothreefour();
+    }
   }
+
 };
 

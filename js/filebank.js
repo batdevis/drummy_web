@@ -1,12 +1,4 @@
-function getFileTree(){
-  console.log('getFileTree()');
+ready( () => {
   ws.emit('getFileTree', {});
-}
-
-function getChannels(){
-  console.log('getChannels()');
   ws.emit('getChannels', {});
-}
-
-ready(getFileTree);
-ready(getChannels);
+})
