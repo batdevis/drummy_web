@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
-  <link rel="stylesheet" href="css/turretcss.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/turretcss.min.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
@@ -27,15 +27,19 @@
     <ul id="channels">
     </ul>
     
-    <h2>banks</h2>
-    <ul id="file_tree">
-    </ul>
+    <div id="file_tree_wrapper">
+      <h2>banks</h2>
+      <h3>channel: <span></span></h3>
+      <ul id="file_tree">
+      </ul>
+    </div>
   </div>
 
   <script src="./js/lib/socket.io.js"></script>
   <script src="./js/store.js"></script>
   <script src="./js/cfg.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./js/ui.js"></script>
   <script src="./js/ws.js"></script>
   <script src="./js/filebank.js"></script>
 </body>

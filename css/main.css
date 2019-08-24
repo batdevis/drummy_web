@@ -1,0 +1,10 @@
+/*
+ * https://coolors.co/e1ce7a-fbffb9-fdd692-ec7357-754f44
+ * */
+
+#file_tree_wrapper {
+  display: none;
+}
+#channels .active{
+  background-color: #FBFFB9;
+}
