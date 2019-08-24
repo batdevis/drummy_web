@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
 	<title>Noboro - Mixer</title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
+  <link rel="stylesheet" type="text/css" href="css/turretcss.min.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
   <link rel="stylesheet" type="text/css" href="css/mixer.css">
 </head>
 <body>
-  <div><a href="setup.html">midi setup</a> | <a href="filebank.html">filebank</a></div>
+  <div class="container">
+    <nav class="nav-inline">
+      <ul>
+        <li><a href="setup.html">midi setup</a></li>
+        <li><a href="filebank.html">filebank</a></li>
+      </ul>
+    </nav>
 
-  <tone-loader></tone-loader>
+    <tone-loader></tone-loader>
 
-  <tone-content>
-    <tone-play-toggle></tone-play-toggle>
-    <!--<tone-transport></tone-transport>-->
-    <div id="tracks">
-      <!--
-      <tone-channel label="A1" id="A1"></tone-channel>
-      <tone-channel label="A2" id="A2"></tone-channel>
-      <tone-channel label="A3" id="A3"></tone-channel>
-      <tone-channel label="A4" id="A4"></tone-channel>
-      -->
-    </div>
-    <div id="grid">
-      <div class="grid" id="grid_0"></div>
-      <div class="grid" id="grid_1"></div>
-      <div class="grid" id="grid_2"></div>
-      <div class="grid" id="grid_3"></div>
-      <div class="grid" id="grid_4"></div>
-      <div class="grid" id="grid_5"></div>
-      <div class="grid" id="grid_6"></div>
-      <div class="grid" id="grid_7"></div>
-      <div class="grid" id="grid_8"></div>
-      <div class="grid" id="grid_9"></div>
-      <div class="grid" id="grid_10"></div>
-      <div class="grid" id="grid_11"></div>
-      <div class="grid" id="grid_12"></div>
-      <div class="grid" id="grid_13"></div>
-      <div class="grid" id="grid_14"></div>
-      <div class="grid" id="grid_15"></div>
-    </div>
-  </tone-content>
+    <tone-content>
+      <tone-play-toggle></tone-play-toggle>
+      <!--<tone-transport></tone-transport>-->
+      <div id="tracks">
+        <!--
+        <tone-channel label="A1" id="A1"></tone-channel>
+        <tone-channel label="A2" id="A2"></tone-channel>
+        <tone-channel label="A3" id="A3"></tone-channel>
+        <tone-channel label="A4" id="A4"></tone-channel>
+        -->
+      </div>
+      <div id="grid">
+        <div class="grid" id="grid_0"></div>
+        <div class="grid" id="grid_1"></div>
+        <div class="grid" id="grid_2"></div>
+        <div class="grid" id="grid_3"></div>
+        <div class="grid" id="grid_4"></div>
+        <div class="grid" id="grid_5"></div>
+        <div class="grid" id="grid_6"></div>
+        <div class="grid" id="grid_7"></div>
+        <div class="grid" id="grid_8"></div>
+        <div class="grid" id="grid_9"></div>
+        <div class="grid" id="grid_10"></div>
+        <div class="grid" id="grid_11"></div>
+        <div class="grid" id="grid_12"></div>
+        <div class="grid" id="grid_13"></div>
+        <div class="grid" id="grid_14"></div>
+        <div class="grid" id="grid_15"></div>
+      </div>
+    </tone-content>
+  </div>
 
   <script src="./js/lib/webcomponents-bundle.js"></script>
 	<script src="./js/lib/Tone.js"></script>
