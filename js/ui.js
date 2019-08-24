@@ -82,6 +82,7 @@ const Ui = {
       return;
     }
     const fileTree = document.getElementById("file_tree");
+    const fileTreeWrapper = document.getElementById("file_tree_wrapper");
 
     while (fileTree.hasChildNodes()) {
       fileTree.removeChild(fileTree.firstChild);
@@ -115,18 +116,17 @@ const Ui = {
 
       dir.files.forEach(file => {
         let pathName = `${dir.name}_${file}`;
+        let filePath = `${dir.name}/${file}`;
 
         let a = document.createElement('a');
         a.innerText = file;
+        a.setAttribute('data-filepath', filePath);
         a.href = '#';
         a.addEventListener('click', (e) => {
           e.preventDefault();
           let channelId = document.querySelector('#file_tree').getAttribute('data-channel-id');
-          let data = {
-            id: channelId,
-            file: file
-          };
-          this.saveChannel(data);
+          this.saveChannel(channelId, filePath);
+          fileTreeWrapper.style.display = 'none';
         });
         
         let li_1 = document.createElement('li');
@@ -143,7 +143,11 @@ const Ui = {
     });
   },
 
-  saveChannel(data) {
+  saveChannel(channelId, filePath) {
+    const data = {
+      channelId: channelId,
+      filePath: filePath
+    };
     console.log('[saveChannel]', data);
     ws.emit('setChannelFile', data);
   },
