@@ -1,5 +1,4 @@
 const CFG = {
-  channel_number: 4,
   audio_folder: 'data/audio',
   pedalboard_buttons: [
     {
@@ -28,9 +27,9 @@ const CFG = {
       description: 'play/pause all'
     },
     {
-      name: "layer_mode",
-      title: 'extra',
-      description: 'not used'
+      name: "play_stop_all",
+      title: 'play/stop all',
+      description: 'play/stop all'
     }
   ]
 };

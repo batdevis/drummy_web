@@ -41,8 +41,13 @@ const Ui = {
       tbody.removeChild(tbody.firstChild);
     }
 
+    let activePedalboard = Store.midiInputs.active.pedalboard;
+    if (typeof(activePedalboard) === 'undefined') {
+      console.log('pedalboard not found for', Store.midiInputs.active.name);
+    }
+      
     Store.cfg.pedalboard_buttons.forEach(button => {
-      let mapping = Store.midiInputs.active.pedalboard.mappings[button.name];
+      let mapping = (activePedalboard) ? activePedalboard.mappings[button.name] : null;
       console.log('button', button);
       let ee = []
       let tr = document.createElement('tr');
@@ -60,17 +65,17 @@ const Ui = {
       ee[2] = document.createElement('td');
       ee[2].class = 'midi_mapping_message_type';
       ee[2].id = `midi_mapping_message_type_${button.name}`;
-      ee[2].innerText = mapping.message_type;
+      ee[2].innerText = mapping ? mapping.message_type : '';
       
       ee[3] = document.createElement('td');
       ee[3].class = 'midi_mapping_channel';
       ee[3].id = `midi_mapping_channel_${button.name}`;
-      ee[3].innerText = mapping.channel;
+      ee[3].innerText = mapping ? mapping.channel : '';
       
       ee[4] = document.createElement('td');
       ee[4].class = 'midi_mapping_value';
       ee[4].id = `midi_mapping_value_${button.name}`;
-      ee[4].innerText = mapping.value;
+      ee[4].innerText = mapping ? mapping.value : '';
 
       ee.forEach(e => tr.appendChild(e));
       tbody.appendChild(tr);

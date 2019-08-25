@@ -24,6 +24,35 @@ ws.on('channels', function (data) {
   Ui.createMixer();
 });
 
+ws.on('cmd', function (data) {
+  console.log('[ws] cmd', data);
+
+  switch(cmd) {
+    case 'track01':
+      mixer.channels[0].mute = !mixer.channels[0].mute;
+      break;
+    case 'track02':
+      mixer.channels[1].mute = !mixer.channels[1].mute;
+      break;
+    case 'track03':
+      mixer.channels[2].mute = !mixer.channels[2].mute;
+      break;
+    case 'track04':
+      mixer.channels[3].mute = !mixer.channels[3].mute;
+      break;
+    case 'play_pause_all':
+      Tone.Transport.toggle();
+      break;
+    case 'play_stop_all':
+      //TODO
+      Tone.Transport.toggle();
+      break;
+    default:
+      console.log('cmd not found', cmd);
+      break;
+  }
+});
+
 ws.on('midiCc', function (data) {
   console.log('[ws] midiCc', data);
 
