@@ -26,7 +26,7 @@ ws.on('channels', function (data) {
 
 ws.on('cmd', function (data) {
   console.log('[ws] cmd', data);
-
+  const cmd = data.cmd;
   switch(cmd) {
     case 'track01':
       mixer.channels[0].mute = !mixer.channels[0].mute;
