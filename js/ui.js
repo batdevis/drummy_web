@@ -44,10 +44,12 @@ const Ui = {
       tbody.removeChild(tbody.firstChild);
     }
 
-    let activePedalboard = Store.midiInputs.active.pedalboard;
-    if (typeof(activePedalboard) === 'undefined') {
-      console.log('pedalboard not found for', Store.midiInputs.active.name);
+    let active = Store.midiInputs.active;
+    if (typeof(active) === 'undefined') {
+      console.error('no active pedalboard');
+      return;
     }
+    let activePedalboard = active.pedalboard;
       
     Store.cfg.pedalboard_buttons.forEach(button => {
       let mapping = (activePedalboard) ? activePedalboard.mappings[button.name] : null;
@@ -90,6 +92,9 @@ const Ui = {
       return;
     }
     const fileTree = document.getElementById("file_tree");
+    if(fileTree === null){
+      return;
+    }
     const fileTreeWrapper = document.getElementById("file_tree_wrapper");
 
     while (fileTree.hasChildNodes()) {

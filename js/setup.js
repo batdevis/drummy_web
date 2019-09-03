@@ -3,7 +3,5 @@ btn.addEventListener('click', getMidiInputList);
 
 function getMidiInputList(){
   console.log('getMidiInputList()');
-  ws.emit('getMidiInputList', {});
+  wsSend({area: 'getMidiInputList'});
 }
-
-ready(getMidiInputList);

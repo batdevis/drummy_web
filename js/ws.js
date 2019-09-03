@@ -1,11 +1,5 @@
 const ws = new WebSocket(Store.cfg.ws_server_url);
 
-ws.onmessage = dispatch;
-
-function wsSend(msg){
-  ws.send(JSON.stringify(msg));
-}
-
 const areaWhiteList = [
   'greetings',
   'midiInputList',
@@ -13,6 +7,20 @@ const areaWhiteList = [
   'channels',
   'cmd'
 ];
+
+ws.onmessage = dispatch;
+
+ws.addEventListener('open', e => {
+  console.log('[ws] websocket open');
+  wsSend({area: 'getChannels'});
+  wsSend({area: 'getFileTree'});
+  wsSend({area: 'getChannels'});
+  wsSend({area: 'getMidiInputList'});
+});
+
+function wsSend(msg){
+  ws.send(JSON.stringify(msg));
+}
 
 function dispatch(e) {
   const data = JSON.parse(e.data);
@@ -60,13 +68,6 @@ function handleChannels(data) {
   Ui.printChannels();
   Ui.createMixer();
 }
-
-ws.addEventListener('open', e => {
-  console.log('[ws] websocket open');
-  wsSend({area: 'getChannels'});
-  wsSend({area: 'getFileTree'});
-  wsSend({area: 'getChannels'});
-});
 
 function handleCmd(data) {
   console.log('[handleCmd]', data);
