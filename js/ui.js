@@ -185,7 +185,8 @@ const Ui = {
         });
 
         let span = document.createElement('span');
-        span.innerText = `: ${channel.file}`;
+        let file = channel.file || '--';
+        span.innerText = `: ${file}`;
 
         li.appendChild(a);
         li.appendChild(span);
