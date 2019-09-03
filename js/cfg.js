@@ -1,4 +1,5 @@
 const CFG = {
+  ws_server_url: 'ws://localhost:8002',
   audio_folder: 'data/audio',
   pedalboard_buttons: [
     {

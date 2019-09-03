@@ -58,7 +58,7 @@ ready( () => {
   document.querySelector("tone-play-toggle").bind(Tone.Transport);
   setupGrid();
   
-  ws.emit('getChannels', {});
+  //wsSend({area: 'getChannels'});
   //mixer = createMixer();
 
   function init(){

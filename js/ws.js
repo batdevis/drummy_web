@@ -1,32 +1,74 @@
-const ws = io('http://localhost:8002');
+const ws = new WebSocket(Store.cfg.ws_server_url);
 
-ws.on('midiInputList', function (data) {
-  console.log('[ws] midiInputList', data);
+ws.onmessage = dispatch;
+
+function wsSend(msg){
+  ws.send(JSON.stringify(msg));
+}
+
+const areaWhiteList = [
+  'greetings',
+  'midiInputList',
+  'fileTree',
+  'channels',
+  'cmd'
+];
+
+function dispatch(e) {
+  const data = JSON.parse(e.data);
+  console.log('[ws] onmessage data', data);
+  if(areaWhiteList.indexOf(data.area) > -1) {
+    switch (data.area) {
+      case 'midiInputList':
+        handleMidiInputList(data.content);
+        break;
+      case 'fileTree':
+        handleFileTree(data.content);
+        break;
+      case 'channels':
+        handleChannels(data.content);
+        break;
+      case 'cmd':
+        handleCmd(data.content);
+        break;
+    }
+  } else {
+    console.error('[ws] area not allowed', data.area);
+  }
+}
+
+function handleMidiInputList(data) {
+  console.log('[ws] midiInputList');
   Store.midiInputs = data;
 
   Ui.printMidiInputs();
   Ui.printMidiInput();
   Ui.printPedalboard();
-});
+}
 
-ws.on('fileTree', function (data) {
+function handleFileTree(data) {
   console.log('[ws] fileTree', data);
   Store.fileTree = data;
 
   Ui.printFileTree();
-});
+}
 
-ws.on('channels', function (data) {
+function handleChannels(data) {
   console.log('[ws] channels', data);
   Store.channels = data.channels;
 
   Ui.printChannels();
   Ui.createMixer();
+}
+
+ws.addEventListener('open', e => {
+  console.log('[ws] websocket open');
+  wsSend({area: 'getChannels'});
 });
 
-ws.on('cmd', function (data) {
-  console.log('[ws] cmd', data);
-  const cmd = data.cmd;
+function handleCmd(data) {
+  console.log('[handleCmd]', data);
+  const cmd = e.data.cmd;
   switch(cmd) {
     case 'track01':
       mixer.channels[0].mute = !mixer.channels[0].mute;
@@ -48,35 +90,7 @@ ws.on('cmd', function (data) {
       Tone.Transport.toggle();
       break;
     default:
-      console.log('cmd not found', cmd);
+      console.log('[handleCmd] cmd not found', cmd);
       break;
   }
-});
-
-ws.on('midiCc', function (data) {
-  console.log('[ws] midiCc', data);
-
-  const channelMap = {
-    96: 0,//play/pause
-    97: 1,
-    98: 2,
-    99: 3,
-    100: 4
-  };
-
-  if (
-    (data.channel == 0) &&
-    (data.value == 127)
-  ){
-    if (data.controller == 0) {
-      Tone.Transport.toggle();
-    } else {
-      var channelId = channelMap[data.controller];
-      console.log(`toggle(${channelId})`);
-      if(mixer.channels.indexOf(channelId) > -1) {
-        mixer.channels[channelId].mute = !mixer.channels[channelId].mute;
-      }
-    }
-  }
-});
-
+}
