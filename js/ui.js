@@ -32,7 +32,10 @@ const Ui = {
 
   activateMidiInput(e) {
     const device = e.target.getAttribute('data-device');
-    ws.emit('setMidiInput', {device: device});
+    wsSend({
+      area: 'setMidiInput', 
+      content: {device: device}
+    });
   },
 
   printPedalboard() {
@@ -154,7 +157,10 @@ const Ui = {
       filePath: filePath
     };
     console.log('[saveChannel]', data);
-    ws.emit('setChannelFile', data);
+    wsSend({
+      area: 'setChannelFile', 
+      content: data
+    });
   },
 
   printChannels() {

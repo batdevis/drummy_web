@@ -1,4 +1,6 @@
-ready( () => {
-  ws.emit('getFileTree', {});
-  ws.emit('getChannels', {});
+/*
+ ready( () => {
+  wsSend('getFileTree', {});
+  wsSend('getChannels', {});
 })
+*/

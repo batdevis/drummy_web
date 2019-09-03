@@ -64,6 +64,8 @@ function handleChannels(data) {
 ws.addEventListener('open', e => {
   console.log('[ws] websocket open');
   wsSend({area: 'getChannels'});
+  wsSend({area: 'getFileTree'});
+  wsSend({area: 'getChannels'});
 });
 
 function handleCmd(data) {
