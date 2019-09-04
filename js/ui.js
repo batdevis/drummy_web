@@ -78,9 +78,14 @@ const Ui = {
       ee[3].innerText = mapping ? mapping.channel : '';
       
       ee[4] = document.createElement('td');
-      ee[4].class = 'midi_mapping_value';
-      ee[4].id = `midi_mapping_value_${button.name}`;
-      ee[4].innerText = mapping ? mapping.value : '';
+      ee[4].class = 'midi_mapping_controller';
+      ee[4].id = `midi_mapping_controller_${button.name}`;
+      ee[4].innerText = mapping ? mapping.controller : '';
+      
+      ee[5] = document.createElement('td');
+      ee[5].class = 'midi_mapping_value';
+      ee[5].id = `midi_mapping_value_${button.name}`;
+      ee[5].innerText = mapping ? mapping.value : '';
 
       ee.forEach(e => tr.appendChild(e));
       tbody.appendChild(tr);
