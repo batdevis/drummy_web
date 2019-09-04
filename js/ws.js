@@ -1,4 +1,4 @@
-const ws = new WebSocket(Store.cfg.ws_server_url);
+const ws = new ReconnectingWebSocket(Store.cfg.ws_server_url);
 
 const areaWhiteList = [
   'greetings',
