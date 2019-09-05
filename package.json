@@ -1,0 +1,26 @@
+{
+  "name": "noboro_web",
+  "version": "1.0.0",
+  "description": "sempler",
+  "main": "index.js",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/batdevis/noboro_web.git"
+  },
+  "keywords": [
+    "tonejs"
+  ],
+  "author": "batdevis",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/batdevis/noboro_web/issues"
+  },
+  "homepage": "https://github.com/batdevis/noboro_web#readme"
+}

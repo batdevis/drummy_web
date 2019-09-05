@@ -62,23 +62,9 @@ function setupGrid(){
 //let mixer;
 
 ready( () => {
-  document.querySelector("tone-play-toggle").bind(Tone.Transport);
-  setupGrid();
-/*  
-  //wsSend({area: 'getChannels'});
-  //mixer = createMixer();
-
-  function init(){
-    //Ui.bindChannels();
+  const eleTonePlayToggle = document.querySelector("tone-play-toggle")
+  if (eleTonePlayToggle) {
+    eleTonePlayToggle.bind(Tone.Transport);
+    setupGrid();
   }
-
-  //wait 1 sec
-  async function onetwothreefour() {
-    await new Promise(resolve => {
-      setTimeout(init, 1000);//millisec
-    });
-  }
-
-  onetwothreefour();
-*/
 });

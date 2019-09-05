@@ -1,13 +1,12 @@
 const Ui = {
+  //setup.html
   printMidiInputs() {
     if(typeof(Store.midiInputs) === 'undefined'){
       return;
     }
     const eleMidiInputs = document.getElementById("midi_inputs");
     if(eleMidiInputs) {
-      while (eleMidiInputs.hasChildNodes()) {
-        eleMidiInputs.removeChild(eleMidiInputs.firstChild);
-      }
+      empty(eleMidiInputs);
       Store.midiInputs.inputs.forEach(input => {
         let li = document.createElement('li');
         let a = document.createElement('a');
@@ -21,6 +20,7 @@ const Ui = {
     }
   },
 
+  //setup.html
   printMidiInput() {
     const eleMidiInputActive = document.getElementById("midi_input_active");
     if(eleMidiInputActive) {
@@ -33,6 +33,7 @@ const Ui = {
     }
   },
 
+  //setup.html
   activateMidiInput(e) {
     const device = e.target.getAttribute('data-device');
     wsSend({
@@ -41,12 +42,11 @@ const Ui = {
     });
   },
 
+  //setup.html
   printPedalboard() {
     const eleTbody = document.querySelector("#midi_mapping tbody");
     if(eleTbody) {
-      while (eleTbody.hasChildNodes()) {
-        eleTbody.removeChild(eleTbody.firstChild);
-      }
+      empty(eleTbody);
     } else {
       return;
     }
@@ -100,6 +100,7 @@ const Ui = {
     });
   },
 
+  //filebank.html
   printFileTree() {
     if(typeof(Store.fileTree) === 'undefined'){
       return;
@@ -110,9 +111,7 @@ const Ui = {
     }
     const eleFileTreeWrapper = document.getElementById("file_tree_wrapper");
 
-    while (eleFileTree.hasChildNodes()) {
-      eleFileTree.removeChild(eleFileTree.firstChild);
-    }
+    empty(eleFileTree);
 
     /*
      *  <ul id="file_tree">
@@ -165,10 +164,11 @@ const Ui = {
       li_0.appendChild(h4_0);
       li_0.appendChild(ul_0);
 
-      fileTree.appendChild(li_0);
+      eleFileTree.appendChild(li_0);
     });
   },
 
+  //filebank.html
   saveChannel(channelId, filePath) {
     const data = {
       channelId: channelId,
@@ -181,15 +181,15 @@ const Ui = {
     });
   },
 
+  //filebank.html
   printChannels() {
     if(typeof(Store.channels) === 'undefined'){
       return;
     }
     const eleChannelsList = document.getElementById("channels");
     if (eleChannelsList) {
-      while (eleChannelsList.hasChildNodes()) {
-        eleChannelsList.removeChild(eleChannelsList.firstChild);
-      }
+      empty(eleChannelsList);
+
       Store.channels.forEach(channel => {
         let li = document.createElement('li');
         li.id = `channelFile_${channel.id}`;
@@ -209,11 +209,12 @@ const Ui = {
         li.appendChild(a);
         li.appendChild(span);
 
-        eleChannelList.appendChild(li);
+        eleChannelsList.appendChild(li);
       });
     }
   },
 
+  //filebank.html
   selectChannel(channel) {
     const eleChannels = document.getElementById("channels");
     const children = eleChannels.children;
@@ -230,6 +231,7 @@ const Ui = {
     }
   },
 
+  //filebank.html
   showFileTree(channel) {
     console.log('showFileTree', channel);
     console.log('typeof(channel)', typeof(channel));
@@ -245,6 +247,7 @@ const Ui = {
     }
   },
 
+  //mixer.html
   bindChannels(mixer) {
     console.log('[printMixer] bindChannels(mixer)', mixer);
     if (mixer.channels.length) {
@@ -258,8 +261,27 @@ const Ui = {
     }
   },
   
+  //mixer.html
   printMixer() {
     if (document.getElementById('mixer')) {
+      const mixer = createMixer();
+       
+      function bindChannelsMixer() {
+        Ui.bindChannels(mixer);
+      } 
+      //wait 1 sec
+      async function onetwothreefour() {
+        await new Promise(resolve => {
+          setTimeout(bindChannelsMixer, 1000);//millisec
+        });
+      }
+      onetwothreefour();
+    }
+  },
+  
+  //console.html
+  printConsole() {
+    if (document.getElementById('console')) {
       const mixer = createMixer();
        
       function bindChannelsMixer() {
@@ -277,3 +299,8 @@ const Ui = {
 
 };
 
+function empty(ele) {
+  while (ele.hasChildNodes()) {
+    ele.removeChild(ele.firstChild);
+  }
+}

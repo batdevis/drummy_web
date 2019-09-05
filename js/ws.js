@@ -71,6 +71,9 @@ function handleChannels(data) {
 
   //mixer.html
   Ui.printMixer();
+  
+  //console.html
+  Ui.printConsole();
 }
 
 function handleCmd(data) {
