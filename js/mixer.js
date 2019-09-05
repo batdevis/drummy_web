@@ -7,6 +7,13 @@ class Mixer {
     return ch;
   }
   
+  addChannels(channels) {
+    channels.forEach(channel => {
+      this.addChannel(channel);
+    });
+    return this.channels;
+  }
+  
   makeChannel(channel) {
     var ch = new Tone.Channel().toMaster();
     let url = `${Store.cfg.audio_folder}/${channel.file}`;
@@ -20,24 +27,29 @@ class Mixer {
   }
 }
 
+function printMixerTracks(channels) {
+  const eleTracks = document.getElementById("tracks");
+  if (eleTracks && channels) {
+    channels.forEach(channel => {
+      console.log('[createMixer] channel', channel);
+      let toneChannel = document.createElement('tone-channel');
+      toneChannel.label = channel.name;
+      toneChannel.id = `channel_${channel.id}`;
+      eleTracks.appendChild(toneChannel);
+    });
+  } else {
+    console.error('[printMixerTracks] eleTracks, channels', eleTracks, channels);
+  }
+}
+
 function createMixer() {
   let obj = new Mixer();
   let eleTracks = document.getElementById("tracks");
   if(eleTracks) {
-    while (eleTracks.hasChildNodes()) {
-      eleTracks.removeChild(eleTracks.firstChild);
-    }
+    empty(eleTracks);
     if (Store.channels) {
-      Store.channels.forEach(channel => {
-        let toneChannel = document.createElement('tone-channel');
-        toneChannel.label = channel.name;
-        toneChannel.id = `channel_${channel.id}`;
-        eleTracks.appendChild(toneChannel);
-
-        let ch = obj.addChannel(channel);
-        console.log('[createMixer] ch', ch);
-        //toneChannel.bind(ch);
-      });
+      obj.addChannels(Store.channels);
+      printMixerTracks(Store.channels);
     }
   } else {
     console.error('[createMixer] eleTracks is', eleTracks);

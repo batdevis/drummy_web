@@ -72,8 +72,8 @@ function handleChannels(data) {
   //mixer.html
   Ui.printMixer();
   
-  //console.html
-  Ui.printConsole();
+  //banco.html
+  Ui.printBanco();
 }
 
 function handleCmd(data) {

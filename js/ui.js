@@ -279,21 +279,23 @@ const Ui = {
     }
   },
   
-  //console.html
-  printConsole() {
-    if (document.getElementById('console')) {
-      const mixer = createMixer();
+  //banco.html
+  printBanco() {
+    if (document.getElementById('banco')) {
+      const banco = createBanco();
+      /*const banco = createBanco();
        
-      function bindChannelsMixer() {
-        Ui.bindChannels(mixer);
-      } 
+      function bindChannelsBanco() {
+        Ui.bindChannels(banco);
+      }
       //wait 1 sec
       async function onetwothreefour() {
         await new Promise(resolve => {
-          setTimeout(bindChannelsMixer, 1000);//millisec
+          setTimeout(bindChannelsBanco, 1000);//millisec
         });
       }
       onetwothreefour();
+      */ 
     }
   }
 
