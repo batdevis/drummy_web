@@ -14,7 +14,6 @@ ws.addEventListener('open', e => {
   console.log('[ws] websocket open');
   wsSend({area: 'getChannels'});
   wsSend({area: 'getFileTree'});
-  wsSend({area: 'getChannels'});
   wsSend({area: 'getMidiInputList'});
 });
 
@@ -49,6 +48,7 @@ function handleMidiInputList(data) {
   console.log('[ws] midiInputList');
   Store.midiInputs = data;
 
+  //setup.html
   Ui.printMidiInputs();
   Ui.printMidiInput();
   Ui.printPedalboard();
@@ -58,6 +58,7 @@ function handleFileTree(data) {
   console.log('[ws] fileTree', data);
   Store.fileTree = data;
 
+  //filebank.html
   Ui.printFileTree();
 }
 
@@ -65,8 +66,11 @@ function handleChannels(data) {
   console.log('[ws] channels', data);
   Store.channels = data.channels;
 
+  //filebank.html
   Ui.printChannels();
-  Ui.createMixer();
+
+  //mixer.html
+  Ui.printMixer();
 }
 
 function handleCmd(data) {

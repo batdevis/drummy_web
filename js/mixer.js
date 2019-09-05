@@ -22,18 +22,25 @@ class Mixer {
 
 function createMixer() {
   let obj = new Mixer();
-  let tracks = document.getElementById("tracks");
+  let eleTracks = document.getElementById("tracks");
+  if(eleTracks) {
+    while (eleTracks.hasChildNodes()) {
+      eleTracks.removeChild(eleTracks.firstChild);
+    }
+    if (Store.channels) {
+      Store.channels.forEach(channel => {
+        let toneChannel = document.createElement('tone-channel');
+        toneChannel.label = channel.name;
+        toneChannel.id = `channel_${channel.id}`;
+        eleTracks.appendChild(toneChannel);
 
-  if (Store.channels) {
-    Store.channels.forEach(channel => {
-      let toneChannel = document.createElement('tone-channel');
-      toneChannel.label = channel.name;
-      toneChannel.id = `channel_${channel.id}`;
-      tracks.appendChild(toneChannel);
-
-      let ch = obj.addChannel(channel);
-      //toneChannel.bind(ch);
-    });
+        let ch = obj.addChannel(channel);
+        console.log('[createMixer] ch', ch);
+        //toneChannel.bind(ch);
+      });
+    }
+  } else {
+    console.error('[createMixer] eleTracks is', eleTracks);
   }
   return obj;
 }
@@ -52,12 +59,12 @@ function setupGrid(){
   }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "16n").start(0);
 }
 
-let mixer;
+//let mixer;
 
 ready( () => {
   document.querySelector("tone-play-toggle").bind(Tone.Transport);
   setupGrid();
-  
+/*  
   //wsSend({area: 'getChannels'});
   //mixer = createMixer();
 
@@ -73,4 +80,5 @@ ready( () => {
   }
 
   onetwothreefour();
+*/
 });

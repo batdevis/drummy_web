@@ -1,5 +1,5 @@
-const btn = document.getElementById("midi_input_refresh");
-btn.addEventListener('click', getMidiInputList);
+const eleBtn = document.getElementById("midi_input_refresh");
+eleBtn.addEventListener('click', getMidiInputList);
 
 function getMidiInputList(){
   console.log('getMidiInputList()');

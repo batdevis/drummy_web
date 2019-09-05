@@ -3,31 +3,34 @@ const Ui = {
     if(typeof(Store.midiInputs) === 'undefined'){
       return;
     }
-    const midiInputs = document.getElementById("midi_inputs");
-
-    while (midiInputs.hasChildNodes()) {
-      midiInputs.removeChild(midiInputs.firstChild);
+    const eleMidiInputs = document.getElementById("midi_inputs");
+    if(eleMidiInputs) {
+      while (eleMidiInputs.hasChildNodes()) {
+        eleMidiInputs.removeChild(eleMidiInputs.firstChild);
+      }
+      Store.midiInputs.inputs.forEach(input => {
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        a.href = '#';
+        a.innerText = input;
+        a.setAttribute('data-device', input);
+        a.addEventListener('click', this.activateMidiInput, false);
+        li.appendChild(a);
+        eleMidiInputs.appendChild(li);
+      });
     }
-    Store.midiInputs.inputs.forEach(input => {
-      let li = document.createElement('li');
-      let a = document.createElement('a');
-      a.href = '#';
-      a.innerText = input;
-      a.setAttribute('data-device', input);
-      a.addEventListener('click', this.activateMidiInput, false);
-      li.appendChild(a);
-      midiInputs.appendChild(li);
-    });
   },
 
   printMidiInput() {
-    const midiInputActive = document.getElementById("midi_input_active");
-    const name = (
-      Store.midiInputs && 
-      Store.midiInputs.active && 
-      Store.midiInputs.active.name
-    ) || '';
-    midiInputActive.innerText = name;
+    const eleMidiInputActive = document.getElementById("midi_input_active");
+    if(eleMidiInputActive) {
+      const name = (
+        Store.midiInputs && 
+        Store.midiInputs.active && 
+        Store.midiInputs.active.name
+      ) || '';
+      eleMidiInputActive.innerText = name;
+    }
   },
 
   activateMidiInput(e) {
@@ -39,9 +42,13 @@ const Ui = {
   },
 
   printPedalboard() {
-    const tbody = document.querySelector("#midi_mapping tbody");
-    while (tbody.hasChildNodes()) {
-      tbody.removeChild(tbody.firstChild);
+    const eleTbody = document.querySelector("#midi_mapping tbody");
+    if(eleTbody) {
+      while (eleTbody.hasChildNodes()) {
+        eleTbody.removeChild(eleTbody.firstChild);
+      }
+    } else {
+      return;
     }
 
     let active = Store.midiInputs.active;
@@ -88,7 +95,8 @@ const Ui = {
       ee[5].innerText = mapping ? mapping.value : '';
 
       ee.forEach(e => tr.appendChild(e));
-      tbody.appendChild(tr);
+      
+      eleTbody.appendChild(tr);
     });
   },
 
@@ -96,14 +104,14 @@ const Ui = {
     if(typeof(Store.fileTree) === 'undefined'){
       return;
     }
-    const fileTree = document.getElementById("file_tree");
-    if(fileTree === null){
+    const eleFileTree = document.getElementById("file_tree");
+    if(eleFileTree === null){
       return;
     }
-    const fileTreeWrapper = document.getElementById("file_tree_wrapper");
+    const eleFileTreeWrapper = document.getElementById("file_tree_wrapper");
 
-    while (fileTree.hasChildNodes()) {
-      fileTree.removeChild(fileTree.firstChild);
+    while (eleFileTree.hasChildNodes()) {
+      eleFileTree.removeChild(eleFileTree.firstChild);
     }
 
     /*
@@ -144,7 +152,7 @@ const Ui = {
           e.preventDefault();
           let channelId = document.querySelector('#file_tree').getAttribute('data-channel-id');
           this.saveChannel(channelId, filePath);
-          fileTreeWrapper.style.display = 'none';
+          eleFileTreeWrapper.style.display = 'none';
         });
         
         let li_1 = document.createElement('li');
@@ -177,10 +185,10 @@ const Ui = {
     if(typeof(Store.channels) === 'undefined'){
       return;
     }
-    const channelsList = document.getElementById("channels");
-    if (channelsList) {
-      while (channelsList.hasChildNodes()) {
-        channelsList.removeChild(channelsList.firstChild);
+    const eleChannelsList = document.getElementById("channels");
+    if (eleChannelsList) {
+      while (eleChannelsList.hasChildNodes()) {
+        eleChannelsList.removeChild(eleChannelsList.firstChild);
       }
       Store.channels.forEach(channel => {
         let li = document.createElement('li');
@@ -201,21 +209,21 @@ const Ui = {
         li.appendChild(a);
         li.appendChild(span);
 
-        channels.appendChild(li);
+        eleChannelList.appendChild(li);
       });
     }
   },
 
   selectChannel(channel) {
-    const channels = document.getElementById("channels");
-    const children = channels.children;
+    const eleChannels = document.getElementById("channels");
+    const children = eleChannels.children;
     const activeLis = document.querySelector('#channels .active');
     if (activeLis) {
       activeLis.classList.remove('active');
     }
     if (typeof(channel) !== 'undefined') {
-      const channelLink = document.getElementById(`channelFile_${channel.id}`);
-      channelLink.classList.add('active');
+      const eleChannelLink = document.getElementById(`channelFile_${channel.id}`);
+      eleChannelLink.classList.add('active');
       this.showFileTree(channel);
     } else {
       this.showFileTree();
@@ -225,39 +233,42 @@ const Ui = {
   showFileTree(channel) {
     console.log('showFileTree', channel);
     console.log('typeof(channel)', typeof(channel));
-    const fileTreeWrapper = document.getElementById('file_tree_wrapper');
-    const fileTree = document.getElementById('file_tree');
+    const eleFileTreeWrapper = document.getElementById('file_tree_wrapper');
+    const eleFileTree = document.getElementById('file_tree');
     if (typeof(channel) !== 'undefined') {
-      const channelName = document.querySelector('#file_tree_wrapper h3 span');
-      const fileTree = document.getElementById('file_tree');
+      const eleChannelName = document.querySelector('#file_tree_wrapper h3 span');
       fileTree.setAttribute('data-channel-id', channel.id);
-      channelName.innerText = channel.name;
-      fileTreeWrapper.style.display = 'block';
+      eleChannelName.innerText = channel.name;
+      eleFileTreeWrapper.style.display = 'block';
     } else {
-      fileTreeWrapper.style.display = 'none';
+      eleFileTreeWrapper.style.display = 'none';
     }
   },
 
-  bindChannels() {
+  bindChannels(mixer) {
+    console.log('[printMixer] bindChannels(mixer)', mixer);
     if (mixer.channels.length) {
       let i = 0;
       Store.channels.forEach(channel => {
         let channelRef = `channel_${channel.id}`;
-        let toneChannel = document.getElementById(channelRef);
-        toneChannel.bind(mixer.channels[i]);
+        let eleToneChannel = document.getElementById(channelRef);
+        eleToneChannel.bind(mixer.channels[i]);
         i++;
       });
     }
   },
   
-  createMixer() {
+  printMixer() {
     if (document.getElementById('mixer')) {
-      mixer = createMixer();
-      
+      const mixer = createMixer();
+       
+      function bindChannelsMixer() {
+        Ui.bindChannels(mixer);
+      } 
       //wait 1 sec
       async function onetwothreefour() {
         await new Promise(resolve => {
-          setTimeout(Ui.bindChannels, 1000);//millisec
+          setTimeout(bindChannelsMixer, 1000);//millisec
         });
       }
       onetwothreefour();
