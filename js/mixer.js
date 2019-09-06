@@ -1,10 +1,15 @@
 class Mixer {
   channels = [];
 
-  addChannel(channel) {
-    let ch = this.makeChannel(channel);
-    this.channels.push(ch);
-    return ch;
+  addChannel(data) {
+    let rtn = this.makeChannel(data);
+    let channel = {
+      toneChannel: rtn.toneChannel,
+      player: rtn.player,
+      data: data
+    };
+    this.channels.push(channel);
+    return channel;
   }
   
   addChannels(channels) {
@@ -15,15 +20,14 @@ class Mixer {
   }
   
   makeChannel(channel) {
-    var ch = new Tone.Channel().toMaster();
+    var toneChannel = new Tone.Channel().toMaster();
     let url = `${Store.cfg.audio_folder}/${channel.file}`;
     var player = new Tone.Player({
       url : url,
       loop : true
     }).sync().start(0);
-    player.chain(ch);
-
-    return ch;
+    player.chain(toneChannel);
+    return {player: player, toneChannel: toneChannel};
   }
 }
 
