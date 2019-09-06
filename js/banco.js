@@ -43,21 +43,19 @@ function printBancoTracks(banco) {
     Nexus.context = Tone.context;
     
     // main playPauseBtn
-    let playPauseBtnId = `play_pause_btn_all`;
-    let elePlayPauseBtn = document.createElement('div');
-    elePlayPauseBtn.id = playPauseBtnId;
-    eleBancoTracks.appendChild(elePlayPauseBtn);
-    let nxPlayPauseBtn = new Nexus.TextButton(`#${playPauseBtnId}`, {
+    let nxPlayPauseBtn = Nexus.Add.TextButton(`#${eleBancoTracks.id}`, {
       'size': [450,50],
       'state': false,
       'text': 'Play all',
       'alternateText': 'Stop all'
     });
     nxPlayPauseBtn.on('change', v => {
-      console.log('[printBancoTracks] play/stop all');
       Tone.Transport.toggle();
     });
     
+    // grid
+    Ui.setupGrid();
+
     const channels = banco.channels;
     let i = 0;
 
@@ -109,7 +107,6 @@ function createBanco(){
 ready( () => {
   const eleBanco = document.querySelector("banco")
   if (eleBanco) {
-    setupBanco();
   }
 });
 */
