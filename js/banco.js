@@ -65,36 +65,29 @@ function printBancoTracks(banco) {
       let channel = channels[i];
       
       let eleTrack = document.createElement('div');
-      eleId = `track_${channel.data.id}`;
-      eleTrack.id = eleId;
+      eleTrackId = `track_${channel.data.id}`;
+      eleTrack.id = eleTrackId;
       eleBancoTracks.appendChild(eleTrack);
 
-      // playPauseBtn
-      let playPauseBtnId = `play_pause_btn_${channel.data.id}`;
-      let elePlayPauseBtn = document.createElement('div');
-      elePlayPauseBtn.id = playPauseBtnId;
-      eleTrack.appendChild(elePlayPauseBtn);
-      let nxPlayPauseBtn = new Nexus.TextButton(`#${playPauseBtnId}`, {
-        'size': [150,50],
-        'state': false,
-        'text': `Activate [${i}] ${channel.data.name}`,
-        'alternateText': `Mute [${i}] ${channel.data.name}`
-      });
-      nxPlayPauseBtn.on('change', v => {
-        console.log('[printBancoTracks] channel.toneChannel', i, channel.toneChannel);
-        channel.toneChannel.mute = !channel.toneChannel.mute;
-      });
-      
       //oscilloscope
-      let oscilloscopeId = `oscilloscope_${channel.data.id}`;
-      let eleOscilloscope = document.createElement('div');
-      eleOscilloscope.id = oscilloscopeId;
-      eleTrack.appendChild(eleOscilloscope);
-      
-      let nxOscilloscope = new Nexus.Oscilloscope(`#${oscilloscopeId}`);
+      let nxOscilloscope = Nexus.Add.Oscilloscope(`#${eleTrackId}`);
       nxOscilloscope.connect(channel.player);
 
-      //ui.oscilloscope.connect(player2)
+      // btn
+      let nxBtn = Nexus.Add.Button(`#${eleTrackId}`, {
+        'size': [50,50],
+        'mode': 'toggle',
+        'state': !channel.toneChannel.mute
+      });
+      nxBtn.on('change', v => {
+        console.log('[printBancoTracks] channel.toneChannel', i, channel.toneChannel);
+        channel.toneChannel.mute = !channel.toneChannel.mute;
+        if(channel.toneChannel.mute) {
+          nxOscilloscope.disconnect();
+        } else {
+          nxOscilloscope.connect(channel.player);
+        }
+      });
     }
   } else {
     console.error('[printBancoTracks] banco', banco);
