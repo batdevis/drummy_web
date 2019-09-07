@@ -7,18 +7,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" sizes="174x174" href="./favicon.png">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/turretcss.min.css">
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="css/banco.css">
 </head>
 <body>
-  <!--<div class="container">-->
+  <div id="area">
     <nav class="nav-inline">
       <ul>
-        <li><a href="setup.html">midi setup</a></li>
+        <li><a href="#" class="current">console</a></li>
         <li><a href="filebank.html">filebank</a></li>
-        <li><a href="mixer.html">mixer</a></li>
+        <li><a href="setup.html">midi setup</a></li>
       </ul>
     </nav>
+
+    <h1>BatBox</h1>
 
     <div id="banco">
       <div id="grid">
@@ -44,7 +47,7 @@
       </div>
     </div>
 
-  <!--</div>-->
+  </div>
 
 	<script src="./js/lib/reconnecting-websocket.min.js"></script>
   <!--<script src="./js/lib/webcomponents-bundle.js"></script>-->

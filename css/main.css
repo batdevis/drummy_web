@@ -5,6 +5,10 @@ body {
   font-family: monospace;
 }
 
+a.current {
+  text-decoration: none;
+}
+
 #file_tree_wrapper {
   display: none;
 }
