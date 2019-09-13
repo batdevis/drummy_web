@@ -283,8 +283,7 @@ const Ui = {
   printBanco() {
     if (document.getElementById('banco')) {
       const banco = createBanco();
-      /*const banco = createBanco();
-       
+      /*
       function bindChannelsBanco() {
         Ui.bindChannels(banco);
       }

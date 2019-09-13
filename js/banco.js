@@ -65,6 +65,7 @@ function printBancoTracks(banco) {
       let eleTrack = document.createElement('div');
       eleTrackId = `track_${channel.data.id}`;
       eleTrack.id = eleTrackId;
+      eleTrack.classList.add('track');
       eleBancoTracks.appendChild(eleTrack);
 
       //oscilloscope

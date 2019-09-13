@@ -4,3 +4,11 @@
   border: 1px solid #DDD;
   background-color: #EEE;
 }
+#banco_tracks {
+  height: 300px;
+  align-content: stretch;
+  align-items: flex-start;
+}
+.track {
+ justify-content: flex-start; 
+}
