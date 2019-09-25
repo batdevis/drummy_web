@@ -38,12 +38,13 @@ class Banco {
 function printBancoTracks(banco) {
   console.log('[printBancoTracks] banco.channels', banco.channels);
 
+  const eleBancoPlayall = document.getElementById("banco_playall");
   const eleBancoTracks = document.getElementById("banco_tracks");
-  if (eleBancoTracks && banco.channels) {
+  if (eleBancoPlayall && eleBancoTracks && banco.channels) {
     Nexus.context = Tone.context;
     
     // main playPauseBtn
-    let nxPlayPauseBtn = Nexus.Add.TextButton(`#${eleBancoTracks.id}`, {
+    let nxPlayPauseBtn = Nexus.Add.TextButton(`#${eleBancoPlayall.id}`, {
       'size': [450,50],
       'state': false,
       'text': 'Play all',
@@ -66,14 +67,30 @@ function printBancoTracks(banco) {
       eleTrackId = `track_${channel.data.id}`;
       eleTrack.id = eleTrackId;
       eleTrack.classList.add('track');
+      
+      let eleTrackPlay = document.createElement('div');
+      eleTrackPlayId = `track_play_${channel.data.id}`;
+      eleTrackPlay.id = eleTrackPlayId;
+      eleTrackPlay.classList.add('track_control');
+      eleTrack.appendChild(eleTrackPlay);
+
+      let eleTrackWave = document.createElement('div');
+      eleTrackWaveId = `track_wave_${channel.data.id}`;
+      eleTrackWave.id = eleTrackWaveId;
+			eleTrackWave.classList.add('track_control');
+			eleTrackWave.classList.add('track_control_wave');
+      eleTrack.appendChild(eleTrackWave);
+      
       eleBancoTracks.appendChild(eleTrack);
 
       //oscilloscope
-      let nxOscilloscope = Nexus.Add.Oscilloscope(`#${eleTrackId}`);
+      let nxOscilloscope = Nexus.Add.Oscilloscope(`#${eleTrackWaveId}`, {
+        'size': [250,50]
+      });
       nxOscilloscope.connect(channel.player);
-
+      
       // btn
-      let nxBtn = Nexus.Add.Button(`#${eleTrackId}`, {
+      let nxBtn = Nexus.Add.Button(`#${eleTrackPlayId}`, {
         'size': [50,50],
         'mode': 'toggle',
         'state': !channel.toneChannel.mute
