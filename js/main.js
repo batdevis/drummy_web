@@ -6,3 +6,8 @@ function ready(fn) {
   }
 }
 
+function nsInit() {
+  console.log('[nsInit]');
+  Nexus.context = Tone.context;
+}
+ready(nsInit);

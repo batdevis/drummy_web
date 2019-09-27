@@ -41,7 +41,6 @@ function printBancoTracks(banco) {
   const eleBancoPlayall = document.getElementById("banco_playall");
   const eleBancoTracks = document.getElementById("banco_tracks");
   if (eleBancoPlayall && eleBancoTracks && banco.channels) {
-    Nexus.context = Tone.context;
     
     // main playPauseBtn
     let nxPlayPauseBtn = Nexus.Add.TextButton(`#${eleBancoPlayall.id}`, {
@@ -88,7 +87,7 @@ function printBancoTracks(banco) {
         'size': [250,50]
       });
       nxOscilloscope.connect(channel.player);
-      
+
       // btn
       let nxBtn = Nexus.Add.Button(`#${eleTrackPlayId}`, {
         'size': [50,50],
@@ -98,6 +97,7 @@ function printBancoTracks(banco) {
       nxBtn.on('change', v => {
         console.log('[printBancoTracks] channel.toneChannel', i, channel.toneChannel);
         channel.toneChannel.mute = !channel.toneChannel.mute;
+        
         if(channel.toneChannel.mute) {
           nxOscilloscope.disconnect();
         } else {
