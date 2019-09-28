@@ -33,6 +33,11 @@ class Banco {
     player.chain(toneChannel);
     return {player: player, toneChannel: toneChannel};
   }
+
+  toggleChannel(i) {
+    console.log('[Banco] toggleChannel', i);
+    this.channels[i].toneChannel.mute = !this.channels[i].toneChannel.mute;
+  }
 }
 
 function printBancoTracks(banco) {
@@ -59,14 +64,6 @@ function printBancoTracks(banco) {
       eleTrack.id = eleTrackId;
       eleTrack.classList.add('track');
       
-      // btn play track
-      let eleTrackPlay = document.createElement('div');
-      let eleTonePlay = document.createElement('tone-play-toggle');
-      eleTrackPlay.classList.add('track_control');
-      eleTrackPlay.appendChild(eleTonePlay);
-      eleTonePlay.bind(channel.player);
-      eleTrack.appendChild(eleTrackPlay);
-
       //oscilloscope
       let eleTrackWave = document.createElement('div');
       let eleTrackWaveId = `track_wave_${channel.data.id}`;
@@ -85,6 +82,10 @@ function printBancoTracks(banco) {
 */      
       let eleToneFft = document.createElement('tone-fft');
       eleTrackWave.appendChild(eleToneFft);
+      eleToneFft.addEventListener('click', (e) => {
+        e.target.classList.toggle('mute');
+        banco.toggleChannel(i)
+      });
       //eleToneFft.bind(channel.player);
     }
 
@@ -104,8 +105,14 @@ function bindPlayers(banco) {
     let channel = channels[i];
     let eleTrackWaveId = `track_wave_${channel.data.id}`;
     let eleTrackWave = document.getElementById(eleTrackWaveId);
+    
     let eleToneFft = eleTrackWave.querySelector('tone-fft');
     eleToneFft.bind(channel.player);
+
+    /*
+    let eleToneOscilloscope = eleTrackWave.querySelector('tone-oscilloscope');
+    eleToneOscilloscope.bind(channel.player);
+    */
   }
 }
 
