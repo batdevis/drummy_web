@@ -43,16 +43,8 @@ function printBancoTracks(banco) {
   if (eleBancoPlayall && eleBancoTracks && banco.channels) {
     
     // main playPauseBtn
-    let nxPlayPauseBtn = Nexus.Add.TextButton(`#${eleBancoPlayall.id}`, {
-      'size': [450,50],
-      'state': false,
-      'text': 'Play all',
-      'alternateText': 'Stop all'
-    });
-    nxPlayPauseBtn.on('change', v => {
-      Tone.Transport.toggle();
-    });
-    
+    eleBancoPlayall.querySelector("tone-play-toggle").bind(Tone.Transport);
+     
     // grid
     Ui.setupGrid();
 
@@ -63,50 +55,57 @@ function printBancoTracks(banco) {
       let channel = channels[i];
       
       let eleTrack = document.createElement('div');
-      eleTrackId = `track_${channel.data.id}`;
+      let eleTrackId = `track_${channel.data.id}`;
       eleTrack.id = eleTrackId;
       eleTrack.classList.add('track');
       
+      // btn play track
       let eleTrackPlay = document.createElement('div');
-      eleTrackPlayId = `track_play_${channel.data.id}`;
-      eleTrackPlay.id = eleTrackPlayId;
+      let eleTonePlay = document.createElement('tone-play-toggle');
       eleTrackPlay.classList.add('track_control');
+      eleTrackPlay.appendChild(eleTonePlay);
+      eleTonePlay.bind(channel.player);
       eleTrack.appendChild(eleTrackPlay);
 
+      //oscilloscope
       let eleTrackWave = document.createElement('div');
-      eleTrackWaveId = `track_wave_${channel.data.id}`;
+      let eleTrackWaveId = `track_wave_${channel.data.id}`;
       eleTrackWave.id = eleTrackWaveId;
 			eleTrackWave.classList.add('track_control');
 			eleTrackWave.classList.add('track_control_wave');
+      
       eleTrack.appendChild(eleTrackWave);
       
       eleBancoTracks.appendChild(eleTrack);
 
-      //oscilloscope
-      let nxOscilloscope = Nexus.Add.Oscilloscope(`#${eleTrackWaveId}`, {
-        'size': [250,50]
-      });
-      nxOscilloscope.connect(channel.player);
-
-      // btn
-      let nxBtn = Nexus.Add.Button(`#${eleTrackPlayId}`, {
-        'size': [50,50],
-        'mode': 'toggle',
-        'state': !channel.toneChannel.mute
-      });
-      nxBtn.on('change', v => {
-        console.log('[printBancoTracks] channel.toneChannel', i, channel.toneChannel);
-        channel.toneChannel.mute = !channel.toneChannel.mute;
-        
-        if(channel.toneChannel.mute) {
-          nxOscilloscope.disconnect();
-        } else {
-          nxOscilloscope.connect(channel.player);
-        }
-      });
+/*      
+      let eleToneOscilloscope = document.createElement('tone-oscilloscope');
+      eleTrackWave.appendChild(eleToneOscilloscope);
+      eleToneOscilloscope.bind(channel.player);
+*/      
+      let eleToneFft = document.createElement('tone-fft');
+      eleTrackWave.appendChild(eleToneFft);
+      //eleToneFft.bind(channel.player);
     }
+
+    sleep(500).then(() => {
+      bindPlayers(banco);
+    });
   } else {
     console.error('[printBancoTracks] banco', banco);
+  }
+}
+
+function bindPlayers(banco) {
+  const channels = banco.channels;
+  let i = 0;
+
+  for(let i = 0; i < channels.length; i++) {
+    let channel = channels[i];
+    let eleTrackWaveId = `track_wave_${channel.data.id}`;
+    let eleTrackWave = document.getElementById(eleTrackWaveId);
+    let eleToneFft = eleTrackWave.querySelector('tone-fft');
+    eleToneFft.bind(channel.player);
   }
 }
 
@@ -125,6 +124,12 @@ function createBanco(){
 ready( () => {
   const eleBanco = document.querySelector("banco")
   if (eleBanco) {
+
   }
 });
 */
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+

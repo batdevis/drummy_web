@@ -5,9 +5,3 @@ function ready(fn) {
     document.addEventListener('DOMContentLoaded', fn);
   }
 }
-
-function nsInit() {
-  console.log('[nsInit]');
-  Nexus.context = Tone.context;
-}
-ready(nsInit);
