@@ -45,10 +45,20 @@ function printBancoTracks(banco) {
 
   const eleBancoPlayall = document.getElementById("banco_playall");
   const eleBancoTracks = document.getElementById("banco_tracks");
+  eleBancoPlayall.classList.add('stopped');
   if (eleBancoPlayall && eleBancoTracks && banco.channels) {
     
     // main playPauseBtn
-    eleBancoPlayall.querySelector("tone-play-toggle").bind(Tone.Transport);
+    eleBancoPlayall.addEventListener('click', (e) => {
+      Tone.Transport.toggle();
+      sleep(100).then(() => {
+        if (Tone.Transport.state === 'stopped') {
+          e.target.classList.add('stopped');
+        } else {
+          e.target.classList.remove('stopped');
+        }
+      });
+    });
      
     // grid
     Ui.setupGrid();
