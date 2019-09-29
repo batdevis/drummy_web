@@ -1,12 +1,11 @@
 #area {
   width: 480px;
   height: 320px;
-  border: 1px solid #DDD;
-/*  background-color: #FFF;*/
+  border: 1px solid #EEE;
+  background-color: #EEE;
 }
 
 #banco_tracks {
-  height: 300px;
 }
 
 .track {
@@ -41,6 +40,8 @@ tone-oscilloscope, tone-fft {
   display: flex;
   justify-content: center;/*space-between;*/
   align-items: center;
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 
 .banco_menu_items { 

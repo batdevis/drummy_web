@@ -13,17 +13,21 @@
 </head>
 <body>
   <div id="area">
-    <nav class="nav-inline">
-      <ul>
-        <li><a href="#" class="current">console</a></li>
-        <li><a href="filebank.html">filebank</a></li>
-        <li><a href="setup.html">midi setup</a></li>
-      </ul>
-    </nav>
-
-    <!--<h1>BatBox</h1>-->
-
     <div id="banco">
+      
+      <div id="banco_menu">
+        <div id="banco_menu_controls" class="banco_menu_items">
+          <a href="#" class="banco_playall" title="play/stop"></a>
+        </div>
+        <div id="banco_menu_settings" class="banco_menu_items">
+          <a href="filebank.html" class="settings_filebank banco_menu_settings_items" title="filebank"></a>
+          <a href="setup.html" class="settings_setup banco_menu_settings_items" title="midi setup"></a>
+        </div>
+      </div>
+
+      <div id="banco_tracks">
+      </div>
+      
       <div id="grid">
         <div class="grid" id="grid_0"></div>
         <div class="grid" id="grid_1"></div>
@@ -41,23 +45,10 @@
         <div class="grid" id="grid_13"></div>
         <div class="grid" id="grid_14"></div>
         <div class="grid" id="grid_15"></div>
-      </div>
-      
-      <div id="banco_menu">
-        <div id="banco_menu_controls" class="banco_menu_items">
-          <a href="#" class="banco_playall" title="play/stop"></a>
-        </div>
-        <div id="banco_menu_settings" class="banco_menu_items">
-          <a href="filebank.html" class="settings_filebank banco_menu_settings_items" title="filebank"></a>
-          <a href="setup.html" class="settings_setup banco_menu_settings_items" title="midi setup"></a>
-        </div>
-      </div>
+      </div><!--grid-->
+    </div><!--banco-->
 
-      <div id="banco_tracks">
-      </div>
-    </div>
-
-  </div>
+  </div><!--area-->
 
   <script src="./js/lib/reconnecting-websocket.min.js"></script>
   <script src="./js/lib/webcomponents-bundle.js"></script>

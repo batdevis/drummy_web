@@ -301,6 +301,7 @@ const Ui = {
   setupGrid() {
     console.log('[setupGrid] ------------------------------');
     const metronome = new Tone.Sequence( (time, step) => {
+      step = (step === 0) ? 15 : (step - 1);
       Tone.Draw.schedule( () => {
         let prevStep = (step === 0) ? 15 : (step - 1);
         document.getElementById(`grid_${prevStep}`).classList.remove('active');
