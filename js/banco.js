@@ -146,16 +146,9 @@ function createBanco(){
   }
   return obj;
 }
-/*
-ready( () => {
-  const eleBanco = document.querySelector("banco")
-  if (eleBanco) {
-
-  }
-});
-*/
 
 const sleep = (milliseconds) => {
   return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
 
+let mixer;

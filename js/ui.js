@@ -282,19 +282,9 @@ const Ui = {
   //banco.html
   printBanco() {
     if (document.getElementById('banco')) {
-      const banco = createBanco();
-      /*
-      function bindChannelsBanco() {
-        Ui.bindChannels(banco);
-      }
-      //wait 1 sec
-      async function onetwothreefour() {
-        await new Promise(resolve => {
-          setTimeout(bindChannelsBanco, 1000);//millisec
-        });
-      }
-      onetwothreefour();
-      */ 
+      console.log('[Ui.printBanco] mixer before', mixer || null);
+      mixer = createBanco();
+      console.log('[Ui.printBanco] mixer after', mixer);
     }
   },
 
