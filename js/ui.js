@@ -215,6 +215,50 @@ const Ui = {
   },
 
   //filebank.html
+  printChannelList() {
+    if(typeof(Store.channels) === 'undefined'){
+      return;
+    }
+    
+    const eleChannelList = document.getElementById("channel_list");
+    if (eleChannelList) { 
+      empty(eleChannelList);
+      for(let i = 0; i < Store.channels.length; i++) {
+        let channel = Store.channels[i];
+        
+        let eleTrack = document.createElement('div');
+        let eleTrackId = `track_${channel.id}`;
+        eleTrack.id = eleTrackId;
+        eleTrack.classList.add('track');
+
+        let eleTrackWave = document.createElement('div');
+        eleTrackWave.id = `channelFile_${channel.id}`;
+        eleTrackWave.classList.add('track_control');
+        
+        let a = document.createElement('a');
+        a.href = '#';
+        let file = channel.file || '--';
+        a.innerText = `${channel.name}: ${file}`;
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.selectChannel(channel);
+          let eleSelected = document.querySelector('.track_control.selected');
+          if (eleSelected) {
+            eleSelected.classList.remove('selected');
+          }
+          eleTrackWave.classList.add('selected');
+        });
+
+        eleTrackWave.appendChild(a);
+
+        eleTrack.appendChild(eleTrackWave);
+        
+        eleChannelList.appendChild(eleTrack);
+      }
+    }
+  },
+
+  //filebank.html
   selectChannel(channel) {
     const eleChannels = document.getElementById("channels");
     const children = eleChannels.children;
@@ -239,7 +283,7 @@ const Ui = {
     const eleFileTree = document.getElementById('file_tree');
     if (typeof(channel) !== 'undefined') {
       const eleChannelName = document.querySelector('#file_tree_wrapper h3 span');
-      fileTree.setAttribute('data-channel-id', channel.id);
+      eleFileTree.setAttribute('data-channel-id', channel.id);
       eleChannelName.innerText = channel.name;
       eleFileTreeWrapper.style.display = 'block';
     } else {
@@ -282,9 +326,7 @@ const Ui = {
   //banco.html
   printBanco() {
     if (document.getElementById('banco')) {
-      console.log('[Ui.printBanco] mixer before', mixer || null);
       mixer = createBanco();
-      console.log('[Ui.printBanco] mixer after', mixer);
     }
   },
 

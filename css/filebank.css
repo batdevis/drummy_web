@@ -1,0 +1,9 @@
+.settings_filebank {
+  background-color: #E1EB26;
+}
+
+.track_control a {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}

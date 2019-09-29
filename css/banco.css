@@ -1,68 +1,12 @@
-#area {
-  width: 480px;
-  height: 320px;
-  border: 1px solid #EEE;
-  background-color: #EEE;
-}
-
-#banco_tracks {
-}
-
-.track {
-  display: flex;
-  margin-top: 4px;
-}
-
-.track_control {
-}
-
-.track_control_wave {
-  flex: 1;
-}
-
 tone-oscilloscope, tone-fft {
   width: 100%;
-  height: 44px;
-  border-size: 2px;
-  border-style: solid;
-  border-color: #507C5C;
+  height: 100%;
+  background-color: transparent;
   border-radius: 6px;
-  background-color: #507C5C;/*#CFF09E;*/
-  cursor: pointer;
 }
 
 .mute {
   background-color: #EEE;
-}
-
-#banco_menu {
-  width: 480px;
-  display: flex;
-  justify-content: center;/*space-between;*/
-  align-items: center;
-  margin-top: 18px;
-  margin-bottom: 18px;
-}
-
-.banco_menu_items { 
-  flex: 1;
-}
-
-#banco_menu_settings {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.banco_menu_settings_items {
-  /*flex: 1;*/
-}
-
-#banco_menu a {
-  width: 30px;
-  height: 30px;
-  display: block;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .banco_playall {
@@ -71,15 +15,5 @@ tone-oscilloscope, tone-fft {
 
 .banco_playall.stopped {
   background-image: url('../images/icons/green/304280-media/svg/play.svg');
-}
-
-.settings_filebank {
-  background-image: url('../images/icons/green/303837-files-and-folders/svg/file-8.svg');
-/*  margin-left: auto;*/
-}
-
-.settings_setup {
-  background-image: url('../images/icons/green/364266-text-editor/svg/041-list-1.svg');
-  margin-left: 6px;
 }
 

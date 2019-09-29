@@ -67,7 +67,8 @@ function handleChannels(data) {
   Store.channels = data.channels;
 
   //filebank.html
-  Ui.printChannels();
+  //Ui.printChannels();
+  Ui.printChannelList();
 
   //mixer.html
   Ui.printMixer();

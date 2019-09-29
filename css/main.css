@@ -19,6 +19,12 @@ a.current {
   text-decoration: none;
 }
 
+#area {
+  width: 480px;
+  height: 320px;
+  border: 1px solid #EEE;
+  background-color: #EEE;
+}
 #file_tree_wrapper {
   display: none;
 }
