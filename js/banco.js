@@ -43,13 +43,15 @@ class Banco {
 function printBancoTracks(banco) {
   console.log('[printBancoTracks] banco.channels', banco.channels);
 
-  const eleBancoPlayall = document.getElementById("banco_playall");
+  //const eleBancoPlayall = document.getElementById("banco_playall");
+  const eleBancoPlayall = document.querySelector(".banco_playall");
   const eleBancoTracks = document.getElementById("banco_tracks");
   eleBancoPlayall.classList.add('stopped');
   if (eleBancoPlayall && eleBancoTracks && banco.channels) {
     
     // main playPauseBtn
     eleBancoPlayall.addEventListener('click', (e) => {
+      e.preventDefault();
       Tone.Transport.toggle();
       sleep(100).then(() => {
         if (Tone.Transport.state === 'stopped') {
