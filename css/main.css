@@ -24,12 +24,16 @@ a.current {
   margin: 5px;
   width: 20px;
   height: 20px;
-  border: 2px solid #BCBCBC;
+  border-size: 2px;
+  border-style: solid;
+  border-color: #CFF09E;
+  border-radius: 1px;
+  background-color: #FFF;
 }
 #grid .grid.active{
-  background-color: #EEE;
+  background-color: #CFF09E;
 }
 #grid .grid.quarter{
-  background-color: #AAA;
-  border-color: #000;
+  background-color: #507C5C;
+  border-color: #507C5C;
 }
