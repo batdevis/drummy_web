@@ -10,13 +10,12 @@
 }
 
 @font-face {
-  font-family: 'hitroad';
-  src: url('/fonts/hitroad.ttf') format('truetype');
+  font-family: 'jackinput';
+  src: url('/fonts/JAi_____.TTF') format('truetype');
 }
 
 body {
-  /*TODO make font working*/
-  font-family: 'hitroad';
+  font-family: 'jackinput';
   padding: 0;
   margin: 0;
 }

@@ -88,7 +88,6 @@ function printBancoTracks(banco) {
       let eleTrackWaveId = `track_wave_${channel.data.id}`;
       eleTrackWave.id = eleTrackWaveId;
       eleTrackWave.classList.add('track_control');
-      eleTrackWave.classList.add('track_control_wave');
       
       eleTrack.appendChild(eleTrackWave);
       
@@ -101,8 +100,9 @@ function printBancoTracks(banco) {
 */      
       let eleToneFft = document.createElement('tone-fft');
       eleTrackWave.appendChild(eleToneFft);
-      eleToneFft.addEventListener('click', (e) => {
-        e.target.classList.toggle('mute');
+      eleTrackWave.addEventListener('click', (e) => {
+        console.log('[mute]', e.target);
+        eleTrackWave.classList.toggle('mute');
         banco.toggleChannel(i)
       });
       //eleToneFft.bind(channel.player);
@@ -131,11 +131,15 @@ function bindPlayers(banco) {
     let eleTrackWave = document.getElementById(eleTrackWaveId);
     
     let eleToneFft = eleTrackWave.querySelector('tone-fft');
-    eleToneFft.bind(channel.player);
+    if (eleToneFft) {
+      eleToneFft.bind(channel.player);
+    }
 
     /*
     let eleToneOscilloscope = eleTrackWave.querySelector('tone-oscilloscope');
-    eleToneOscilloscope.bind(channel.player);
+    if (eleToneOscilloscope) {
+      eleToneOscilloscope.bind(channel.player);
+    }
     */
   }
 }

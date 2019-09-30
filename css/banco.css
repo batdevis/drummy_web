@@ -7,6 +7,15 @@ tone-oscilloscope, tone-fft {
 
 .mute {
   background-color: #EEE;
+  color: #CCC;
+}
+
+.mute .track_label {
+  color: #666;
+}
+
+.mute tone-oscilloscope, .mute tone-fft {
+  background-color: #CCC;
 }
 
 .banco_playall {

@@ -13,10 +13,14 @@
 }
 
 .track_label {
+  font-family: 'jackinput';
   margin-top: -44px;
   text-align:right;
   color: #EEE;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 400;
+  padding-top: 6px;
+  padding-right: 6px;
 }
 
 .track_control.selected {

@@ -180,7 +180,7 @@ const Ui = {
       content: data
     });
   },
-
+/*
   //filebank.html
   printChannels() {
     if(typeof(Store.channels) === 'undefined'){
@@ -213,7 +213,7 @@ const Ui = {
       });
     }
   },
-
+*/
   //filebank.html
   printChannelList() {
     if(typeof(Store.channels) === 'undefined'){
