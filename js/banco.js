@@ -87,8 +87,8 @@ function printBancoTracks(banco) {
       let eleTrackWave = document.createElement('div');
       let eleTrackWaveId = `track_wave_${channel.data.id}`;
       eleTrackWave.id = eleTrackWaveId;
-			eleTrackWave.classList.add('track_control');
-			eleTrackWave.classList.add('track_control_wave');
+      eleTrackWave.classList.add('track_control');
+      eleTrackWave.classList.add('track_control_wave');
       
       eleTrack.appendChild(eleTrackWave);
       
@@ -106,6 +106,11 @@ function printBancoTracks(banco) {
         banco.toggleChannel(i)
       });
       //eleToneFft.bind(channel.player);
+      
+      let eleTrackLabel = document.createElement('div');
+      eleTrackLabel.classList.add('track_label');
+      eleTrackLabel.innerText = channel.data.name;
+      eleTrackWave.appendChild(eleTrackLabel);
     }
 
     sleep(500).then(() => {

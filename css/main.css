@@ -9,8 +9,14 @@
   outline: none;
 }
 
+@font-face {
+  font-family: 'hitroad';
+  src: url('/fonts/hitroad.ttf') format('truetype');
+}
+
 body {
-  font-family: monospace;
+  /*TODO make font working*/
+  font-family: 'hitroad';
   padding: 0;
   margin: 0;
 }
