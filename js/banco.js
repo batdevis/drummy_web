@@ -46,6 +46,18 @@ class Banco {
   }
 }
 
+function clearGrid() {
+  let gridActive = document.querySelector('.grid.active');
+  console.log('[clearGrid] gridActive', gridActive);
+  if (gridActive) {
+    gridActive.classList.remove('active');
+  }
+  let gridQuarter = document.querySelector('.grid.quarter');
+  if (gridQuarter) {
+    gridQuarter.classList.remove('quarter');
+  }
+}
+
 function printBancoTracks(banco) {
   console.log('[printBancoTracks] banco.channels', banco.channels);
 
@@ -61,14 +73,7 @@ function printBancoTracks(banco) {
       sleep(100).then(() => {
         if (Tone.Transport.state === 'stopped') {
           eleBancoPlayall.classList.add('stopped');
-          let gridActive = document.querySelector('.grid.active');
-          if (gridActive) {
-            gridActive.classList.remove('active');
-          }
-          let gridQuarter = document.querySelector('.grid.quarter');
-          if (gridQuarter) {
-            gridQuarter.classList.remove('quarter');
-          }
+          clearGrid();
         } else {
           eleBancoPlayall.target.classList.remove('stopped');
         }

@@ -91,6 +91,7 @@ function playStopAll() {
   Tone.Transport.toggle();
   if (Tone.Transport.state === 'stopped') {
     eleBancoPlayall.classList.add('stopped');
+    clearGrid();
   } else {
     eleBancoPlayall.classList.remove('stopped');
   }
