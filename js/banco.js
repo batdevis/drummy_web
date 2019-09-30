@@ -35,8 +35,14 @@ class Banco {
   }
 
   toggleChannel(i) {
-    console.log('[Banco] toggleChannel', i);
+    console.log('[Banco] toggleChannel', i, this.channels[i].toneChannel.muted);
     this.channels[i].toneChannel.mute = !this.channels[i].toneChannel.mute;
+  }
+  
+  toggleChannelById(channelId) {
+    const i = mixer.channels.map(channel => channel.data.id).indexOf(channelId);
+    console.log('[Banco] toggleChannelById', channelId, this.channels[i].toneChannel.muted);
+    this.toggleChannel(i);
   }
 }
 
@@ -54,7 +60,7 @@ function printBancoTracks(banco) {
       Tone.Transport.toggle();
       sleep(100).then(() => {
         if (Tone.Transport.state === 'stopped') {
-          e.target.classList.add('stopped');
+          eleBancoPlayall.classList.add('stopped');
           let gridActive = document.querySelector('.grid.active');
           if (gridActive) {
             gridActive.classList.remove('active');
@@ -64,7 +70,7 @@ function printBancoTracks(banco) {
             gridQuarter.classList.remove('quarter');
           }
         } else {
-          e.target.classList.remove('stopped');
+          eleBancoPlayall.target.classList.remove('stopped');
         }
       });
     });

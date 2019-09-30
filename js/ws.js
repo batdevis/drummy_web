@@ -77,31 +77,43 @@ function handleChannels(data) {
   Ui.printBanco();
 }
 
+function toggleChannel(channelId) {
+  const eleTrackWaveId = `track_wave_${channelId}`;
+  const eleTrackWave = document.getElementById(eleTrackWaveId);
+  if (eleTrackWave) {
+    eleTrackWave.classList.toggle('mute');
+  }
+  mixer.toggleChannelById(channelId);
+}
+
+function playStopAll() {
+  const eleBancoPlayall = document.querySelector(".banco_playall");
+  Tone.Transport.toggle();
+  if (Tone.Transport.state === 'stopped') {
+    eleBancoPlayall.classList.add('stopped');
+  } else {
+    eleBancoPlayall.classList.remove('stopped');
+  }
+}
+
 function handleCmd(data) {
   console.log('[handleCmd]', data);
-  const cmd = e.data.cmd;
-  switch(cmd) {
-    case 'track01':
-      mixer.channels[0].mute = !mixer.channels[0].mute;
-      break;
-    case 'track02':
-      mixer.channels[1].mute = !mixer.channels[1].mute;
-      break;
-    case 'track03':
-      mixer.channels[2].mute = !mixer.channels[2].mute;
-      break;
-    case 'track04':
-      mixer.channels[3].mute = !mixer.channels[3].mute;
-      break;
-    case 'play_pause_all':
-      Tone.Transport.toggle();
-      break;
-    case 'play_stop_all':
-      //TODO
-      Tone.Transport.toggle();
-      break;
-    default:
-      console.log('[handleCmd] cmd not found', cmd);
-      break;
+  const cmd = data.cmd;
+  
+  if(cmd.indexOf('trk') === 0) {
+    //cmd is the id of the channel
+    toggleChannel(cmd);
+  } else {
+    switch(cmd) {
+      case 'play_pause_all':
+        playStopAll();
+        break;
+      case 'play_stop_all':
+        playStopAll();
+        break;
+      default:
+        console.log('[handleCmd] cmd not found', cmd);
+        break;
+    }
   }
 }
