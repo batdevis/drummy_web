@@ -75,7 +75,7 @@ function printBancoTracks(banco) {
           eleBancoPlayall.classList.add('stopped');
           clearGrid();
         } else {
-          eleBancoPlayall.target.classList.remove('stopped');
+          eleBancoPlayall.classList.remove('stopped');
         }
       });
     });
